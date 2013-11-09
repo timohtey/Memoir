@@ -1,70 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="#2ECC71"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15sp"
+        android:src="@drawable/link_method_backdrop" />
 
-        <TextView
-            android:id="@+id/linkTxt1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"
-            android:layout_marginTop="10dp"
-            android:text="LINK METHOD"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#ffff"
-            android:textSize="30sp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/anamnesiaTxt"
+    <ImageButton
+        android:id="@+id/beginLinkingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="     Link the given words by using your imagination."
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginBottom="39dp"
+        android:layout_marginTop="85dp"
+        android:layout_toRightOf="@+id/tutorialButton"
+        android:scaleType="centerInside"
+        android:src="@drawable/begin_linking" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/customGameButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp" >
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignLeft="@+id/beginLinkingButton"
+        android:layout_alignRight="@+id/imageView1"
+        android:scaleType="centerInside"
+        android:src="@drawable/custom_game" />
 
-        <Button
-            android:id="@+id/helpBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#3498DB"
-            android:text="\?"
-            android:textColor="#ffff"
-            android:textSize="20sp" />
+    <ImageButton
+        android:id="@+id/tutorialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/customGameButton"
+        android:layout_marginLeft="26dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/tutorial_button" />
 
-        <Button
-            android:id="@+id/startLinkingBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="#3498DB"
-            android:onClick="startLinkMethodGame"
-            android:text="START LINKING!"
-            android:textColor="#ffff"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -27,9 +27,6 @@ public class QuizPhaseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz_phase);
-		ActionBar actionBar = getActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3498DB")));
-        actionBar.setTitle(Html.fromHtml("<large>QUIZ PHASE</large>"));
         
         Intent i = getIntent();
         gm =  (GameModel)i.getSerializableExtra("gameModel");
@@ -55,11 +52,6 @@ public class QuizPhaseActivity extends Activity {
 			gm.endQuizPhase();
 			//TODO: goto result screen
 		}
-			
-		
-		
-		
-		
 	}
 	
 	public void onGo(View v){

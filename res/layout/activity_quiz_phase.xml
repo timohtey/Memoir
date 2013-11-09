@@ -8,46 +8,56 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:background="#ECF0F1"
-       
-        android:gravity="center">
+        android:layout_height="190dp"
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
+            android:id="@+id/quizFirstWordTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Time"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="20sp" />
+            android:layout_weight="0.19"
+            android:background="#2ecc71"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Duck"
+            android:textColor="#ffff"
+            android:textSize="50sp" />
 
-        <TextView
-            android:id="@+id/quizTimeLabel"
-            android:layout_width="75dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="3:12"
-            android:textSize="30sp" />
+            android:layout_weight="0.12"
+            android:background="#95A5A6" >
 
-        <TextView
-            android:id="@+id/quizProgressTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:text="8/10"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="30sp" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Enter the next word in the sequence"
+                android:textColor="#ffff"
+                android:textSize="18sp"
+                android:textStyle="italic" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/quizSecondWordTextField"
+           android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="words"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="20sp" />
+            android:layout_weight="0.19"
+            android:background="#3498db"
+            android:gravity="center_vertical|center_horizontal"
+            android:ems="10"
+            android:textColor="#ffff"
+            android:textSize="50sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.80" >
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -55,40 +65,6 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#3498DB"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/quizFirstWordTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="DUCK"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="30sp" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/icon_chainlink" />
-
-        <EditText
-            android:id="@+id/quizSecondWordTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" >
-
-            <requestFocus />
-        </EditText>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,7 +83,48 @@
                 android:layout_height="wrap_content"
                 android:onClick="onGo"
                 android:text="Go" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ECF0F1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Time"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/quizTimeLabel"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="3:12"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/quizProgressTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="8/10"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="words"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>

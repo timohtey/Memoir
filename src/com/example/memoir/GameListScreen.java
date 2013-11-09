@@ -12,38 +12,54 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class GameListScreen extends Activity {
+	
+	private ImageButton beginLinkingButton;
+	private ImageButton customGameButton;
+	private ImageButton tutorialButton;
+	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gamelist_screen);
         
         ActionBar actionBar = getActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3498DB")));
-        actionBar.setTitle(Html.fromHtml("<large>CHOOSE A GAME</large>"));
+        actionBar.hide();
         
-        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Lovelo/LoveloBlack.otf");
-        TextView myTextView = (TextView)findViewById(R.id.linkTxt1);
-        myTextView.setTypeface(myTypeface);
+        beginLinkingButton = (ImageButton) findViewById(R.id.beginLinkingButton);
+        customGameButton = (ImageButton) findViewById(R.id.customGameButton);
+        tutorialButton = (ImageButton) findViewById(R.id.tutorialButton);
         
-        Button helpBtn =(Button) findViewById(R.id.helpBtn);
-        Typeface type=Typeface.createFromAsset(getAssets(), "fonts/Lovelo/LoveloBlack.otf");
-        helpBtn.setTypeface(type);
-        
-        Button startLinkingBtn =(Button) findViewById(R.id.startLinkingBtn);
-        Typeface type1=Typeface.createFromAsset(getAssets(), "fonts/Lovelo/LoveloBlack.otf");
-        startLinkingBtn.setTypeface(type1);
-        
-        startLinkingBtn.setOnClickListener(new OnClickListener(){    
-            @Override
-			public void onClick(View v) {
-            	Intent myIntent = new Intent(GameListScreen.this, LinkPhaseActivity.class);
-                startActivity(myIntent);
-			}
-        }); 
+        addListeners();
     }
 
+	private void addListeners(){
+		 beginLinkingButton.setOnClickListener(new OnClickListener(){    
+	            @Override
+				public void onClick(View v) {
+	            	Intent myIntent = new Intent(GameListScreen.this, LinkPhaseActivity.class);
+	                startActivity(myIntent);
+				}
+	        }); 
+	        
+	        customGameButton.setOnClickListener(new OnClickListener(){    
+	            @Override
+				public void onClick(View v) {
+//	            	Intent myIntent = new Intent(GameListScreen.this, StatisticsScreen.class);
+//	                startActivity(myIntent);
+				}
+	        }); 
+	        
+	        tutorialButton.setOnClickListener(new OnClickListener(){    
+	            @Override
+				public void onClick(View v) {
+//	            	Intent myIntent = new Intent(GameListScreen.this, StatisticsScreen.class);
+//	                startActivity(myIntent);
+				}
+	        });
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
