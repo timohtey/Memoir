@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/anamnesiaTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="DEVELOPED BY ANAMNESIA"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="23sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.00"
+        android:background="#BDC3C7" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="102dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/about_lou" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/louTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Louis Dumlao"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/louPrjMngTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Project Manager"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="0.00"
+        android:background="#BDC3C7" >
+
+        <ImageView
+            android:id="@+id/ImageView01"
+            android:layout_width="102dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/about_lordd" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lorddTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lordd Lazaro"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Developer"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="0.00"
+        android:background="#BDC3C7" >
+
+        <ImageView
+            android:id="@+id/ImageView02"
+            android:layout_width="102dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/about_dannika" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/dannikaTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dannika Rodriguez"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Developer"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="0.00"
+        android:background="#BDC3C7" >
+
+        <ImageView
+            android:id="@+id/ImageView03"
+            android:layout_width="102dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/about_tim" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/timTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Timothy Rodriguez"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Designer"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/kitsUsedTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="KITS USED"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="23sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="#BDC3C7"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Flat UI Kit"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Eester Kit"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+</LinearLayout>

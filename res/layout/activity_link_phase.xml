@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="nextWord"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.42"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".LinkPhaseActivity" >
+
+        <TextView
+            android:id="@+id/progressLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="8/10 Words"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/firstWordLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:background="#2ecc71"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Duck"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/secondWordLabel"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#3498db"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Boat"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/timeLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="3:10"
+            android:textSize="80sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/nextWordButton"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:onClick="nextWord"
+            android:text="Next Word" />
+
+    </LinearLayout>
+
+</LinearLayout>
