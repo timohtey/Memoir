@@ -3,24 +3,20 @@ package Model;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WordPool {
+import android.app.Activity;
+
+import DAO.MemoirDAO;
+
+public class WordPool extends Activity{
 	ArrayList<String> words = new ArrayList<String>();
 	Random rand = new Random();
+	MemoirDAO DAO = new MemoirDAO(WordPool.this);
 	public WordPool(){
 		populateWords();
 	}
 	
 	public void populateWords(){
-		words.add("Dog");
-		words.add("Boat");
-		words.add("Cat");
-		words.add("Mouse");
-		words.add("Brick");
-		words.add("Crown");
-		words.add("Pencil");
-		words.add("Door");
-		words.add("Table");
-		words.add("Paper");
+		words = DAO.getWordList();
 	}
 	
 	public String getRandomWord(){

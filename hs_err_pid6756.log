@@ -1,0 +1,108 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (javaClasses.cpp:136), pid=6756, tid=5216
+#  fatal error: Invalid layout of preloaded class
+#
+# JRE version:  (7.0_45-b18) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (24.45-b08 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002b0e800):  JavaThread "Unknown thread" [_thread_in_vm, id=5216, stack(0x0000000002990000,0x0000000002a90000)]
+
+Stack: [0x0000000002990000,0x0000000002a90000]
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000002b0e800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=5216, stack(0x0000000002990000,0x0000000002a90000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.022 loading class 0x0000000002b54290 done
+Event: 0.022 loading class 0x0000000002b53cb0 done
+Event: 0.022 loading class 0x0000000002b53c90
+Event: 0.022 loading class 0x0000000002b5bd90
+Event: 0.022 loading class 0x0000000002b5bd90 done
+Event: 0.022 loading class 0x0000000002b5bdc0
+Event: 0.022 loading class 0x0000000002b5bdc0 done
+Event: 0.022 loading class 0x0000000002b5bdf0
+Event: 0.022 loading class 0x0000000002b5bdf0 done
+Event: 0.023 loading class 0x0000000002b53c90 done
+
+
+Dynamic libraries:
+0x000007f669a00000 - 0x000007f669a33000 	C:\Program Files\Java\jre7\bin\javaw.exe
+0x000007fbc2700000 - 0x000007fbc28c0000 	C:\Windows\SYSTEM32\ntdll.dll
+0x000007fbc1990000 - 0x000007fbc1ac6000 	C:\Windows\system32\KERNEL32.DLL
+0x000007fbbf8b0000 - 0x000007fbbf9a3000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fbc18a0000 - 0x000007fbc197e000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fbc1300000 - 0x000007fbc144c000 	C:\Windows\system32\USER32.dll
+0x000007fbbd360000 - 0x000007fbbd5ca000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.9200.16579_none_418ab7ef718b27ef\COMCTL32.dll
+0x000007fbc10a0000 - 0x000007fbc1145000 	C:\Windows\system32\msvcrt.dll
+0x000007fbc2260000 - 0x000007fbc22a8000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007fbc15f0000 - 0x000007fbc1735000 	C:\Windows\system32\RPCRT4.dll
+0x000007fbbfb60000 - 0x000007fbbfca1000 	C:\Windows\system32\GDI32.dll
+0x000007fbc25a0000 - 0x000007fbc25d9000 	C:\Windows\system32\IMM32.DLL
+0x000007fbc25e0000 - 0x000007fbc26f6000 	C:\Windows\system32\MSCTF.dll
+0x0000000058fc0000 - 0x0000000059092000 	C:\Program Files\Java\jre7\bin\msvcr100.dll
+0x00000000587f0000 - 0x0000000058fb9000 	C:\Program Files\Java\jre7\bin\server\jvm.dll
+0x000007fbb8310000 - 0x000007fbb8319000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x000007fbb5ab0000 - 0x000007fbb5ad0000 	C:\Windows\SYSTEM32\WINMM.dll
+0x000007fbc0f90000 - 0x000007fbc0f97000 	C:\Windows\system32\PSAPI.DLL
+0x000007fbc0fa0000 - 0x000007fbc0ff8000 	C:\Windows\system32\WS2_32.dll
+0x000007fbb5a70000 - 0x000007fbb5aa3000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x000007fbc2300000 - 0x000007fbc2309000 	C:\Windows\system32\NSI.dll
+0x000007fbbf860000 - 0x000007fbbf8af000 	C:\Windows\SYSTEM32\cfgmgr32.dll
+0x000007fbbf9b0000 - 0x000007fbbf9d2000 	C:\Windows\system32\DEVOBJ.dll
+0x00000000587e0000 - 0x00000000587ef000 	C:\Program Files\Java\jre7\bin\verify.dll
+0x00000000587b0000 - 0x00000000587d8000 	C:\Program Files\Java\jre7\bin\java.dll
+0x0000000058790000 - 0x00000000587a5000 	C:\Program Files\Java\jre7\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1252 -Xbootclasspath:C:\Users\TimothyJohn\My Software\adt-bundle-windows-x86_64-20130917\sdk\platforms\android-18\android.jar 
+java_command: Model.GameModelTester
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Dev-Cpp\bin;
+USERNAME=TimothyJohn
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 37 Stepping 5, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 8 , 64 bit Build 9200 
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 37 stepping 5, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, aes, ht, tsc, tscinvbit
+
+Memory: 4k page, physical 4044896k(1435432k free), swap 5027936k(1772572k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (24.45-b08) for windows-amd64 JRE (1.7.0_45-b18), built on Oct  8 2013 05:47:22 by "java_re" with unknown MS VC++:1600
+
+time: Tue Nov 19 15:17:37 2013
+elapsed time: 0 seconds
+
