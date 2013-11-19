@@ -8,10 +8,17 @@ public class GameModel implements Serializable{
 	private int currentWordIndex = 0;
 	private int skips =0;
 	private int mistakes=0;
-	private WordPool wordPool = new WordPool();
+	private WordPool wordPool;
 	//declare time finished;
 	
+	public GameModel(int wordCount, ArrayList<String> wordList){
+		wordPool = new WordPool(wordList);
+		for(int i=0;i<wordCount;i++){
+			this.wordList.add(wordPool.getRandomWord());
+		}
+	}
 	public GameModel(int wordCount){
+		wordPool = new WordPool(wordList);
 		for(int i=0;i<wordCount;i++){
 			wordList.add(wordPool.getRandomWord());
 		}

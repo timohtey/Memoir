@@ -7,16 +7,15 @@ import android.app.Activity;
 
 import DAO.MemoirDAO;
 
-public class WordPool extends Activity{
+public class WordPool {
 	ArrayList<String> words = new ArrayList<String>();
 	Random rand = new Random();
-	MemoirDAO DAO = new MemoirDAO(WordPool.this);
-	public WordPool(){
-		populateWords();
+	public WordPool(ArrayList<String> wordList){
+		populateWords(wordList);
 	}
 	
-	public void populateWords(){
-		words = DAO.getWordList();
+	public void populateWords(ArrayList<String> wordList){
+		words = wordList;
 	}
 	
 	public String getRandomWord(){

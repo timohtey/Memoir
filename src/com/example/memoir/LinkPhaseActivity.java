@@ -1,6 +1,8 @@
 package com.example.memoir;
 
+import DAO.MemoirDAO;
 import Model.GameModel;
+import Model.WordPool;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,16 +28,16 @@ public class LinkPhaseActivity extends Activity {
 	TextView timeLabel;
 	Button nextWordLabel;
 	ImageButton pauseButton;
+	MemoirDAO DAO = new MemoirDAO(LinkPhaseActivity.this);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_link_phase);
-		
+		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
-	    
-		gm = new GameModel(10);
+		gm = new GameModel(10, DAO.getWordList());
 		progressLabel = (TextView)findViewById(R.id.progressLabel);
 		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel);
 		secondWordLabel = (TextView)findViewById(R.id.secondWordLabel);
@@ -76,6 +78,7 @@ public class LinkPhaseActivity extends Activity {
 		    	 startActivity(intent);
 		     }
 		  }.start();
+		  DAO.close();
 	}
 	
 	private void addListener(){

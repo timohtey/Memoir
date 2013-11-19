@@ -1,7 +1,6 @@
 package DAO;
 import java.util.ArrayList;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -52,9 +51,9 @@ public class MemoirDAO{
 			super(context, DB_NAME, null, DB_VERSION); 
 			TextFileReader reader = new TextFileReader();
 			
-			setWordList(new ArrayList<String>());
-			setWordList(null);
-			setWordList(reader.readFileFromAssets(context, WORD_TEXTFILE));
+			wordList = new ArrayList<String>();
+			wordList = null;
+			wordList = reader.readFileFromAssets(context, WORD_TEXTFILE);
 			
 			tipList = new ArrayList<String>();
 			tipList = null;
@@ -66,9 +65,9 @@ public class MemoirDAO{
 		public void onCreate(SQLiteDatabase db) {
 			
 			db.execSQL(CREATE_WORD_TABLE);
-			for(int i = 0; i < getWordList().size(); i++){
+			for(int i = 0; i < wordList.size(); i++){
 				db.execSQL("INSERT INTO " + WORD_TABLE +
-						"(" + KEY_WORD + ") VALUES ('" + getWordList().get(i) + "');");	
+						"(" + KEY_WORD + ") VALUES ('" + wordList.get(i) + "');");	
 			}
 			
 			db.execSQL(CREATE_TIPS_TABLE);
@@ -102,14 +101,14 @@ public class MemoirDAO{
 		dbHelper.close();
 	}
 	
-	
+	/*
 	public long insertWordEntry(String word){
 		
 		ContentValues cv = new ContentValues();
 		cv.put(KEY_WORD, word);
 		return ourDatabase.insert(WORD_TABLE, KEY_WORD, cv);
 	}
-	
+	*/
 	
 	public String fetchWordData(String type){
 		
@@ -137,12 +136,8 @@ public class MemoirDAO{
 		}
 		return result;
 	}
-
-	public static ArrayList<String> getWordList() {
+	
+	public ArrayList<String> getWordList(){
 		return wordList;
-	}
-
-	public static void setWordList(ArrayList<String> wordList) {
-		MemoirDAO.wordList = wordList;
 	}
 }
