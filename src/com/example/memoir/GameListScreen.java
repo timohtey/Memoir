@@ -47,8 +47,8 @@ public class GameListScreen extends Activity {
 	        customGameButton.setOnClickListener(new OnClickListener(){    
 	            @Override
 				public void onClick(View v) {
-//	            	Intent myIntent = new Intent(GameListScreen.this, StatisticsScreen.class);
-//	                startActivity(myIntent);
+	            	Intent myIntent = new Intent(GameListScreen.this, LinkPhaseUtility.class);
+	            	startActivity(myIntent);
 				}
 	        }); 
 	        

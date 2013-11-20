@@ -24,8 +24,8 @@
         <activity android:name="StatisticsScreen"></activity>
         <activity android:name="GameListScreen"></activity>
         <activity android:name="LinkPhaseActivity"></activity>
-        <activity android:name="QuizPhaseActivity"></activity>
         <activity android:name="PauseScreen"></activity>
+        <activity android:name="QuizPhaseActivity"></activity>
         
     </application>
 

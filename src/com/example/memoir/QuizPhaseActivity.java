@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class QuizPhaseActivity extends Activity {
@@ -21,8 +22,8 @@ public class QuizPhaseActivity extends Activity {
 	TextView quizProgressTextView;
 	TextView quizFirstWordTextView;
 	EditText quizSecondWordTextField;
-	Button skipButton;
-	Button goButton;
+	ImageButton skipButton;
+	ImageButton goButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,16 +35,14 @@ public class QuizPhaseActivity extends Activity {
         quizProgressTextView = (TextView) findViewById(R.id.quizProgressTextView);
         quizFirstWordTextView = (TextView) findViewById(R.id.quizFirstWordTextView);
         quizSecondWordTextField = (EditText)findViewById(R.id.quizSecondWordTextField);
-        skipButton = (Button)findViewById(R.id.skipButton); 
-        goButton = (Button)findViewById(R.id.goButton);
+        skipButton = (ImageButton)findViewById(R.id.skipButton); 
+        goButton = (ImageButton)findViewById(R.id.goButton);
         
         gm.startQuizPhase();
         
         int progress = gm.getCurrentWordIndex()+1;
         quizProgressTextView.setText(progress+"/"+gm.getWordCount());
         quizFirstWordTextView.setText(gm.getWordOne());
-        
-  
 	}
 	
 	public void onSkip(View v){

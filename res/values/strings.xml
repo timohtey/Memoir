@@ -12,5 +12,9 @@
 
     <string name="title_activity_link_phase">LinkPhaseActivity</string>
     <string name="title_activity_quiz_phase">QuizPhaseActivity</string>
+    <string-array name="choiceNumbers">
+        <item >10</item>
+        <item >15</item>
+    </string-array>
 
 </resources>
