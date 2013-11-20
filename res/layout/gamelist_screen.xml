@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/goBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -18,10 +18,11 @@
         android:id="@+id/beginLinkingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_alignRight="@+id/imageView1"
-        android:layout_alignTop="@+id/imageView1"
+        android:layout_alignBottom="@+id/goBtn"
+        android:layout_alignRight="@+id/goBtn"
+        android:layout_alignTop="@+id/goBtn"
         android:layout_marginBottom="39dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="85dp"
         android:layout_toRightOf="@+id/tutorialButton"
         android:scaleType="centerInside"
@@ -31,9 +32,10 @@
         android:id="@+id/customGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignBottom="@+id/goBtn"
         android:layout_alignLeft="@+id/beginLinkingButton"
-        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignRight="@+id/goBtn"
+        android:layout_marginRight="10dp"
         android:scaleType="centerInside"
         android:src="@drawable/custom_game" />
 
@@ -43,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/customGameButton"
-        android:layout_marginLeft="26dp"
+        android:layout_marginLeft="46dp"
         android:scaleType="centerInside"
         android:src="@drawable/tutorial_button" />
 

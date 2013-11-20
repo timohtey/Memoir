@@ -24,7 +24,7 @@
         android:background="#BDC3C7" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/goBtn"
             android:layout_width="102dp"
             android:layout_height="69dp"
             android:layout_marginTop="3dp"

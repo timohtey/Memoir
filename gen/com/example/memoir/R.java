@@ -72,8 +72,8 @@ public final class R {
         public static final int enterTextView=0x7f090016;
         public static final int exitButton=0x7f09002e;
         public static final int firstWordLabel=0x7f090015;
+        public static final int goBtn=0x7f090001;
         public static final int goButton=0x7f090024;
-        public static final int imageView1=0x7f090001;
         public static final int imageView2=0x7f090012;
         public static final int kitsUsedTxt=0x7f09000d;
         public static final int linkTxt1=0x7f09002f;

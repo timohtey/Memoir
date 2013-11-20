@@ -12,7 +12,7 @@
         android:background="#7F8C8D" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/goBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"

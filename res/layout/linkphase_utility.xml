@@ -7,8 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background = "#2ECC71" >
+        android:background="#2ECC71"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/enterTextView"
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
             android:layout_marginTop="10sp"
-            android:text="Enter text:"
+            android:text="Enter custom words:"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 
@@ -24,24 +24,32 @@
             android:id="@+id/customWordsTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
+            android:layout_weight="0.64"
             android:ems="10"
             android:hint="seperate words with a &apos;,&apos;"
+            android:singleLine="true"
             android:textColor="#ffff"
             android:textColorHint="#ffff"
-            android:singleLine = "true"
-            android:textSize="20sp" >
+            android:textSize="25sp" >
 
             <requestFocus />
         </EditText>
-
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:src="@drawable/go_button" />
+        android:layout_weight="0.13"
+        android:background="#2C3E50"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/goBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="250sp"
+            android:layout_marginTop="10sp"
+            android:src="@drawable/go_button" />
+    </LinearLayout>
 
 </LinearLayout>
