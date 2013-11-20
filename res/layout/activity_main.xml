@@ -13,7 +13,7 @@
         android1:src="@drawable/brain_logo" />
 
     <TextView
-        android1:id="@+id/textView1"
+        android1:id="@+id/enterTextView"
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
         android1:layout_gravity="center_horizontal"
