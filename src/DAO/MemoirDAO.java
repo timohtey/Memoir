@@ -1,5 +1,6 @@
 package DAO;
 import java.util.ArrayList;
+import java.util.Random;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -137,7 +138,19 @@ public class MemoirDAO{
 		return result;
 	}
 	
-	public ArrayList<String> getWordList(){
+	public ArrayList<String> getWordList(int n){
+		Random random = new Random();
+		ArrayList<Integer> uniqueKeys = new ArrayList<Integer>();
+		ArrayList<String> uniqueWords = new ArrayList<String>();
+		int key = 0;
+		key = random.nextInt(wordList.size());
+		uniqueKeys.add(key);
+		for(int i = 0; i<n;i++){
+			do{
+				key = random.nextInt(wordList.size());
+			}while(uniqueKeys.contains(key) != false);
+			uniqueWords.add(wordList.get(key));
+		}
 		return wordList;
 	}
 }

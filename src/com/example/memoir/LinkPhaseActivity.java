@@ -37,7 +37,7 @@ public class LinkPhaseActivity extends Activity {
 		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
-		gm = new GameModel(10, DAO.getWordList());
+		gm = new GameModel(10, DAO.getWordList(10));
 		progressLabel = (TextView)findViewById(R.id.progressLabel);
 		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel);
 		secondWordLabel = (TextView)findViewById(R.id.secondWordLabel);
