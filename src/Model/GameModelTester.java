@@ -3,9 +3,9 @@ package Model;
 import java.util.Scanner;
 
 public class GameModelTester {
-	
+	/*
 	public static void main(String args[]){
-		GameModel gm = new GameModel(10);
+		GameModel gm = new GameModel(GameModel.FIXED_TIME_MODE, new MemoirDAO(LinkPhaseActivity.this));
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("WordCount: "+gm.getWordCount());
 		System.out.println("WordList:");
@@ -51,4 +51,5 @@ public class GameModelTester {
 		System.out.println(gm.getWordCount()-gm.getSkips()+"/"+gm.getWordCount()+" words");
 		System.out.println("Mistakes: "+gm.getMistakes());
 	}
+	*/
 }

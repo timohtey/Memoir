@@ -45,14 +45,6 @@ public class QuizPhaseActivity extends Activity {
         quizFirstWordTextView.setText(gm.getWordOne());
 	}
 	
-	public void onSkip(View v){
-		gm.skipWord();
-		if(gm.getCurrentWordIndex()==gm.getWordCount()-2){
-			gm.endQuizPhase();
-			//TODO: goto result screen
-		}
-	}
-	
 	public void onGo(View v){
 		String answer = quizSecondWordTextField.getText().toString();
 		if(gm.answerQuiz(answer)){
@@ -61,7 +53,7 @@ public class QuizPhaseActivity extends Activity {
 	        quizFirstWordTextView.setText(gm.getWordOne());
 	        
 	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
-	        	gm.endQuizPhase();
+	        	gm.endQuizPhase(true);
 	        	//TODO: goto result screen
 	        }
 		}

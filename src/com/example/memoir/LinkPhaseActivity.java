@@ -37,7 +37,8 @@ public class LinkPhaseActivity extends Activity {
 		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
-		gm = new GameModel(10, DAO.getWordList());
+		gm = new GameModel(GameModel.FIXED_TIME_MODE, DAO);
+		
 		progressLabel = (TextView)findViewById(R.id.progressLabel);
 		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel);
 		secondWordLabel = (TextView)findViewById(R.id.secondWordLabel);
@@ -47,6 +48,7 @@ public class LinkPhaseActivity extends Activity {
         
 		int progress = gm.getCurrentWordIndex()+1;
 		progressLabel.setText(progress+"/"+gm.getWordCount());
+		
 		try {
 			firstWordLabel.setText(gm.getWordOne());
 			secondWordLabel.setText(gm.getWordTwo());
@@ -57,7 +59,7 @@ public class LinkPhaseActivity extends Activity {
 		
 		addListener();
 		
-		new CountDownTimer(300000, 1000) {
+		new CountDownTimer(gm.getTimeLimit(), 1000) {
 			int i = 60;
 		     public void onTick(long millisUntilFinished) {
 		    	 i--;
@@ -103,14 +105,13 @@ public class LinkPhaseActivity extends Activity {
 		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
 			Intent intent = new Intent(this,QuizPhaseActivity.class);
 			startActivity(intent);
-			//
 			intent.putExtra("gameModel",gm);
 			startActivity(intent);
 		}else{
 			if(gm.getCurrentWordIndex()+3==gm.getWordCount()){
 				nextWordLabel.setText("Start Quiz!");
 			}
-			gm.linkNextWord();
+			gm.nextWord();
 			int progress = gm.getCurrentWordIndex()+1;
 			progressLabel.setText(progress+"/"+gm.getWordCount());
 			try {
@@ -120,10 +121,6 @@ public class LinkPhaseActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		if(gm.getCurrentWordIndex() == 9){
-			Intent intent = new Intent(this,QuizPhaseActivity.class);
-			startActivity(intent);
 		}
 	}
 	
