@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
@@ -22,36 +23,60 @@ public class QuizPhaseActivity extends Activity {
 	TextView quizProgressTextView;
 	TextView quizFirstWordTextView;
 	EditText quizSecondWordTextField;
-	ImageButton skipButton;
 	ImageButton goButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz_phase);
         
+		ActionBar actionBar = getActionBar();
+	    actionBar.hide();
+		
         Intent i = getIntent();
         gm =  (GameModel)i.getSerializableExtra("gameModel");
+        
         quizTimeTextView = (TextView) findViewById(R.id.quizTimeLabel);
         quizProgressTextView = (TextView) findViewById(R.id.quizProgressTextView);
         quizFirstWordTextView = (TextView) findViewById(R.id.quizFirstWordTextView);
         quizSecondWordTextField = (EditText)findViewById(R.id.quizSecondWordTextField);
-        skipButton = (ImageButton)findViewById(R.id.skipButton); 
         goButton = (ImageButton)findViewById(R.id.goButton);
         
         gm.startQuizPhase();
         
-        int progress = gm.getCurrentWordIndex()+1;
-        quizProgressTextView.setText(progress+"/"+gm.getWordCount());
-        quizFirstWordTextView.setText(gm.getWordOne());
+        new CountDownTimer(gm.getTimeLimit(), 1000) {
+			int i = 60;
+		     public void onTick(long millisUntilFinished) {
+		    	 i--;
+		    	 if(i<10){
+		    		 quizTimeTextView.setText((millisUntilFinished/1000)/60 + ":0"+ i);
+		    	 }
+		    	 else quizTimeTextView.setText((millisUntilFinished/1000)/60 + ":"+ i);
+		    	 if(i == 0){
+		    		 i = 60;
+		    	 }
+		    	 if (i ==1 && (millisUntilFinished/1000)/60 == 0 ){
+		    		 i = 0;
+		    	 }
+		     }
+
+		     public void onFinish() {
+		    	 //TODO: goto result screen
+		    	 gm.endQuizPhase(false);
+		    	 Intent intent = new Intent(QuizPhaseActivity.this, AboutScreen.class);
+		    	 intent.putExtra("gameModel",gm);
+		    	 startActivity(intent);
+		     }
+		  }.start();
+		  
+        updateLabels();
+        
 	}
 	
 	public void onGo(View v){
 		String answer = quizSecondWordTextField.getText().toString();
 		if(gm.answerQuiz(answer)){
-			int progress = gm.getCurrentWordIndex()+1;
-			quizProgressTextView.setText(progress+"/"+gm.getWordCount());
-	        quizFirstWordTextView.setText(gm.getWordOne());
-	        
+			updateLabels();
+			quizSecondWordTextField.setText("");
 	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
 	        	gm.endQuizPhase(true);
 	        	//TODO: goto result screen
@@ -64,6 +89,12 @@ public class QuizPhaseActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.quiz_phase, menu);
 		return true;
+	}
+	
+	public void updateLabels(){
+		int progress = gm.getCurrentWordIndex()+1;
+        quizProgressTextView.setText(progress+"/"+gm.getWordCount());
+        quizFirstWordTextView.setText(gm.getWordOne());
 	}
 	
 	

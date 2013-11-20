@@ -16,6 +16,7 @@ public class GameModel implements Serializable{
 	public static final int INITIAL_TIME_LIMIT = 300000;
 	
 	//Difficulty
+	//TODO: save level in db;
 	public static int linkLevel = 1;
 	
 	private ArrayList<String> wordList = new ArrayList<String>();
@@ -33,11 +34,9 @@ public class GameModel implements Serializable{
 		setDifficulty(mode);
 		
 		//get words
-		WordPool wordPool = new WordPool(dao.getWordList());
-		for(int i=0;i<wordCount;i++){
-			wordList.add(wordPool.getRandomWord());
-		}
-		
+		wordList = dao.getWordList(wordCount);
+		wordCount= wordList.size();
+		System.out.println("test");
 	}
 	
 	public void setDifficulty(int mode){
@@ -66,11 +65,10 @@ public class GameModel implements Serializable{
 	public String getWordOne(){
 		return wordList.get(currentWordIndex);
 	}
-	public String getWordTwo() throws Exception{
-		if(currentWordIndex<wordList.size())
-			return wordList.get(currentWordIndex+1);
-		else
-			throw new Exception();
+	public String getWordTwo(){
+		if(currentWordIndex>=wordList.size())
+			return "";
+		return wordList.get(currentWordIndex+1);
 	}
 	public void nextWord(){
 		if(currentWordIndex<wordList.size()-2){

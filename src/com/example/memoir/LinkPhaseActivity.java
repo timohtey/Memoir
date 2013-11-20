@@ -26,37 +26,31 @@ public class LinkPhaseActivity extends Activity {
 	TextView firstWordLabel;
 	TextView secondWordLabel;
 	TextView timeLabel;
-	Button nextWordLabel;
-	ImageButton pauseButton;
+	ImageButton nextWordLabel;
+	ImageButton prevWordLabel;
 	MemoirDAO DAO = new MemoirDAO(LinkPhaseActivity.this);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_link_phase);
+		
+		
 		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
 		gm = new GameModel(GameModel.FIXED_TIME_MODE, DAO);
+		
+		
 		progressLabel = (TextView)findViewById(R.id.progressLabel);
 		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel);
 		secondWordLabel = (TextView)findViewById(R.id.secondWordLabel);
 		timeLabel = (TextView)findViewById(R.id.timeLabel);
-		nextWordLabel = (Button)findViewById(R.id.nextWordButton);
-		pauseButton = (ImageButton) findViewById(R.id.pauseButton);
-        
-		int progress = gm.getCurrentWordIndex()+1;
-		progressLabel.setText(progress+"/"+gm.getWordCount());
-		
-		try {
-			firstWordLabel.setText(gm.getWordOne());
-			secondWordLabel.setText(gm.getWordTwo());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		
-		addListener();
+		nextWordLabel = (ImageButton)findViewById(R.id.nextWordButton);
+		prevWordLabel = (ImageButton)findViewById(R.id.prevBtn);
+
+		prevWordLabel.setEnabled(false);
+		updateLabels();
 		
 		new CountDownTimer(gm.getTimeLimit(), 1000) {
 			int i = 60;
@@ -76,20 +70,12 @@ public class LinkPhaseActivity extends Activity {
 
 		     public void onFinish() {
 		    	 Intent intent = new Intent(LinkPhaseActivity.this, QuizPhaseActivity.class);
+		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
 		     }
 		  }.start();
+		  
 		  DAO.close();
-	}
-	
-	private void addListener(){
-		pauseButton.setOnClickListener(new OnClickListener(){    
-            @Override
-			public void onClick(View v) {
-            	Intent myIntent = new Intent(LinkPhaseActivity.this, PauseScreen.class);
-                startActivity(myIntent);
-			}
-        }); 
 	}
 
 	@Override
@@ -101,26 +87,38 @@ public class LinkPhaseActivity extends Activity {
 	
 	
 	public void nextWord(View v){
+		prevWordLabel.setEnabled(true);
 		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
 			Intent intent = new Intent(this,QuizPhaseActivity.class);
-			startActivity(intent);
 			intent.putExtra("gameModel",gm);
 			startActivity(intent);
 		}else{
 			if(gm.getCurrentWordIndex()+3==gm.getWordCount()){
-				nextWordLabel.setText("Start Quiz!");
+				//nextWordLabel.setText("Start Quiz!");
 			}
 			gm.nextWord();
-			int progress = gm.getCurrentWordIndex()+1;
-			progressLabel.setText(progress+"/"+gm.getWordCount());
-			try {
-				firstWordLabel.setText(gm.getWordOne());
-				secondWordLabel.setText(gm.getWordTwo());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			updateLabels();
 		}
+	}
+	
+	public void prevWord(View v){
+		if(gm.getCurrentWordIndex()==0)
+			prevWordLabel.setEnabled(false);
+		if(gm.getCurrentWordIndex()+3==gm.getWordCount()){
+			//nextWordLabel.setText("Next Word");
+		}
+		gm.prevWord();
+		updateLabels();
+	}
+	
+	public void updateLabels(){
+		//Progress
+		int progress = gm.getCurrentWordIndex()+1;
+		progressLabel.setText(progress+"/"+gm.getWordCount());
+		
+		//Words
+		firstWordLabel.setText(gm.getWordOne());
+		secondWordLabel.setText(gm.getWordTwo());
 	}
 	
 }

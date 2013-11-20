@@ -111,17 +111,12 @@
             android:layout_weight="0.80" >
 
             <ImageButton
-                android:id="@+id/skipButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/skip_button" />
-
-            <ImageButton
                 android:id="@+id/goButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginLeft="110sp"
+                android:onClick="onGo"
                 android:src="@drawable/go_button" />
 
         </LinearLayout>

@@ -131,12 +131,14 @@
             android:id="@+id/prevBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="prevWord"
             android:src="@drawable/prev_button" />
 
         <ImageButton
             android:id="@+id/nextWordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="nextWord"
             android:src="@drawable/next_button" />
 
     </LinearLayout>
