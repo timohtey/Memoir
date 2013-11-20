@@ -3,6 +3,7 @@ package com.example.memoir;
 import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +12,8 @@ import android.os.CountDownTimer;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,6 +44,7 @@ public class QuizPhaseActivity extends Activity {
         quizSecondWordTextField = (EditText)findViewById(R.id.quizSecondWordTextField);
         goButton = (ImageButton)findViewById(R.id.goButton);
         
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         gm.startQuizPhase();
         
         new CountDownTimer(gm.getTimeLimit(), 1000) {
@@ -66,14 +70,18 @@ public class QuizPhaseActivity extends Activity {
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
 		     }
+		     
+		     
 		  }.start();
 		  
         updateLabels();
         
 	}
 	
+	
 	public void onGo(View v){
 		String answer = quizSecondWordTextField.getText().toString();
+		
 		if(gm.answerQuiz(answer)){
 			updateLabels();
 			quizSecondWordTextField.setText("");
