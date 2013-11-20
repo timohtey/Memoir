@@ -12,7 +12,7 @@
         android:background="#7F8C8D" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/goBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
@@ -79,7 +79,7 @@
             android:background="#95A5A6" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/enterTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -100,6 +100,7 @@
             android:background="#3498db"
             android:gravity="center_vertical|center_horizontal"
             android:ems="10"
+            android:singleLine="true"
             android:textColor="#ffff"
             android:textSize="50sp"/>
 

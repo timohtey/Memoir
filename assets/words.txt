@@ -2,7 +2,6 @@ ball
 bat
 bear
 bed
-book
 boy
 bun
 can
@@ -75,7 +74,6 @@ home
 horn
 hose
 juice
-kite
 lake
 maid
 mask
@@ -89,7 +87,6 @@ mother
 morning
 nest
 nose
-pear
 pen
 pencil
 plant
@@ -148,7 +145,6 @@ dock
 doctor
 downtown
 drum
-dust
 eye
 family
 father
@@ -173,8 +169,6 @@ loaf
 lock
 lunch
 lunchroom
-meal
-mother
 notebook
 owl
 pail
@@ -204,7 +198,6 @@ trip
 uncle
 vase
 winter
-water
 week
 wheel
 wish
@@ -218,7 +211,6 @@ army
 baseball
 beef
 birthday
-boy
 brush
 bushes
 butter 
@@ -239,7 +231,6 @@ gate
 glove
 glue
 goldfish
-goose
 grain
 hair
 hot
@@ -248,7 +239,6 @@ ladybug
 mailbox
 number
 oatmeal
-pail
 pancake
 pear
 pest

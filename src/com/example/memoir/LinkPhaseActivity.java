@@ -38,7 +38,6 @@ public class LinkPhaseActivity extends Activity {
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
 		gm = new GameModel(GameModel.FIXED_TIME_MODE, DAO);
-		
 		progressLabel = (TextView)findViewById(R.id.progressLabel);
 		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel);
 		secondWordLabel = (TextView)findViewById(R.id.secondWordLabel);
