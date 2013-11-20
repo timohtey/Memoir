@@ -124,24 +124,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#7F8C8D">
+
+        <ImageButton
+            android:id="@+id/prevBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/prev_button" />
+
+        <ImageButton
+            android:id="@+id/nextWordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/next_button" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/nextWordButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.19"
-            android:onClick="nextWord"
-            android:text="Next Word" />
-
-        <Button
-            android:id="@+id/prevBtn"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.19"
-            android:text="Previous Word" />
 
     </LinearLayout>
 

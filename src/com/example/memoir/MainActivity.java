@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
 
 	private ImageButton beginButton;
 	private ImageButton statisticsButton;
-	private ImageButton notYouButton;
+	private ImageButton aboutButton;
 	private TextView nameText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         beginButton = (ImageButton) findViewById(R.id.beginButton);
         statisticsButton = (ImageButton) findViewById(R.id.statisticsButton);
         nameText = (TextView) findViewById(R.id.nameText);
-        notYouButton = (ImageButton) findViewById(R.id.notYouButton);
+        aboutButton = (ImageButton) findViewById(R.id.aboutButton);
         
         addListeners();
         
@@ -51,11 +51,11 @@ public class MainActivity extends Activity {
 			}
         }); 
         
-        notYouButton.setOnClickListener(new OnClickListener(){    
+        aboutButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-//            	Intent myIntent = new Intent(MainActivity.this, StatisticsScreen.class);
-//                startActivity(myIntent);
+            	Intent myIntent = new Intent(MainActivity.this, AboutScreen.class);
+                startActivity(myIntent);
 			}
         }); 
     }
