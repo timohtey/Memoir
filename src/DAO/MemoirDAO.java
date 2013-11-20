@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class MemoirDAO{
 	
@@ -143,14 +144,26 @@ public class MemoirDAO{
 		ArrayList<Integer> uniqueKeys = new ArrayList<Integer>();
 		ArrayList<String> uniqueWords = new ArrayList<String>();
 		int key = 0;
+		boolean unique;
 		key = random.nextInt(wordList.size());
 		uniqueKeys.add(key);
+		uniqueWords.add(wordList.get(key));
 		for(int i = 0; i<n;i++){
+			unique = false;
 			do{
 				key = random.nextInt(wordList.size());
-			}while(uniqueKeys.contains(key) != false);
+				for(int j = 0; unique == false && j<uniqueKeys.size(); j++){
+					if(uniqueKeys.get(j).equals(key)){
+						unique = false;
+					}
+					else {
+						uniqueKeys.add(key);
+						unique = true;
+					}
+				}
+			}while(unique==false);
 			uniqueWords.add(wordList.get(key));
 		}
-		return wordList;
+		return uniqueWords;
 	}
 }
