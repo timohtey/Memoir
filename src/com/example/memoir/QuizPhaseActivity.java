@@ -3,6 +3,7 @@ package com.example.memoir;
 import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -57,7 +58,6 @@ public class QuizPhaseActivity extends Activity {
 		
 		timeBar.setMax(gm.getTimeLimit());
 		progressBar.setMax(gm.getWordCount());
-		
         gm.startQuizPhase();
         
         timer = new CountDownTimer(gm.getTimeLimit(), 1000) {
@@ -85,6 +85,8 @@ public class QuizPhaseActivity extends Activity {
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
 		     }
+		     
+		     
 		  }.start();
 		  
 		  //OVERRIDE KEYBOARD DONE
@@ -113,7 +115,6 @@ public class QuizPhaseActivity extends Activity {
         updateLabels();
         
 	}
-	
 	
 	public void updateLabels(){
 		int progress = gm.getCurrentWordIndex()+1;
