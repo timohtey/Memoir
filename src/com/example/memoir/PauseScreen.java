@@ -1,5 +1,6 @@
 package com.example.memoir;
 
+import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +16,7 @@ public class PauseScreen extends Activity{
 	private ImageButton restartButton;
 	private ImageButton settingsButton;
 	private ImageButton exitButton;
+	private GameModel gm;
 	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,10 @@ public class PauseScreen extends Activity{
         
         ActionBar actionBar = getActionBar();
         actionBar.hide();
+        
+        Intent i = getIntent();
+        gm =  (GameModel)i.getSerializableExtra("gameModel");
+        
         
         resumeButton = (ImageButton) findViewById(R.id.resumeButton);
         restartButton = (ImageButton) findViewById(R.id.restartButton);
@@ -44,8 +50,14 @@ public class PauseScreen extends Activity{
 		restartButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
+            	
+            	if(gm.isGameRecorded()){
+                	gm.recordGame();
+                }
             	Intent myIntent = new Intent(PauseScreen.this, PauseScreen.class);
                 startActivity(myIntent);
+                
+                finish();
 			}
         }); 
 		
@@ -60,8 +72,13 @@ public class PauseScreen extends Activity{
 		exitButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
+            	if(gm.isGameRecorded()){
+                 	gm.recordGame();
+                }
             	Intent myIntent = new Intent(PauseScreen.this, MainActivity.class);
                 startActivity(myIntent);
+               
+                finish();
 			}
         }); 
 		

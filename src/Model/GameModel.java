@@ -27,6 +27,8 @@ public class GameModel implements Serializable{
 	private int currentWordIndex = 0;
 	private int tryCount = 0;
 	private int correctCount = 0;
+	
+	private boolean isGameRecorded = false;
 	//declare time finished;
 	
 	public GameModel(int mode, MemoirDAO dao){
@@ -43,10 +45,10 @@ public class GameModel implements Serializable{
 		switch(mode){
 		case FIXED_TIME_MODE : 
 			timeLimit = INITIAL_TIME_LIMIT; 
-			wordCount = INITIAL_WORD_COUNT + (linkLevel * WORD_DIFFICULTY_INCREMENT);
+			wordCount = INITIAL_WORD_COUNT + ((linkLevel-1) * WORD_DIFFICULTY_INCREMENT);
 			break;
 		case FIXED_WORDCOUNT_MODE :
-			timeLimit = INITIAL_TIME_LIMIT - (linkLevel * TIME_DIFFICULTY_INCREMENT);
+			timeLimit = INITIAL_TIME_LIMIT - ((linkLevel-1) * TIME_DIFFICULTY_INCREMENT);
 			wordCount = INITIAL_WORD_COUNT;
 			break;
 		}
@@ -94,14 +96,23 @@ public class GameModel implements Serializable{
 		}
 	}
 	
-	public float computeAccuracy(){
-		return Math.round((float)correctCount * tryCount);
+	public int computeAccuracy(){
+	
+		if(tryCount==0)
+			return 0;
+		return (int)Math.round((float)correctCount / tryCount*100);
 	}
 
 	public void startQuizPhase(){
 		currentWordIndex =0;
 		setDifficulty(mode);
+		isGameRecorded = true;
 	}
+	
+	public boolean isGameRecorded(){
+		return isGameRecorded;
+	}
+	
 	public void endQuizPhase(boolean isFinished){
 		int remainingWords = getWordCount() - getCurrentWordIndex()+1;
 		tryCount += remainingWords;
@@ -120,6 +131,11 @@ public class GameModel implements Serializable{
 			linkLevel-=1;
 			
 		}
+		
+		recordGame();
 	}
-
+	
+	public void recordGame(){
+		//TODO: record the game
+	}
 } 

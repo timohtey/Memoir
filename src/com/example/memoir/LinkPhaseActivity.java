@@ -2,20 +2,16 @@ package com.example.memoir;
 
 import DAO.MemoirDAO;
 import Model.GameModel;
-import Model.WordPool;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Html;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class LinkPhaseActivity extends Activity {
@@ -26,8 +22,12 @@ public class LinkPhaseActivity extends Activity {
 	TextView firstWordLabel;
 	TextView secondWordLabel;
 	TextView timeLabel;
-	ImageButton nextWordLabel;
-	ImageButton prevWordLabel;
+	Button nextWordLabel;
+	Button prevWordLabel;
+	ProgressBar progressBar;
+	ProgressBar timeBar;
+	CountDownTimer timer;
+	long timeRemaining=0;
 	MemoirDAO DAO = new MemoirDAO(LinkPhaseActivity.this);
 	
 	@Override
@@ -42,19 +42,25 @@ public class LinkPhaseActivity extends Activity {
 		gm = new GameModel(GameModel.FIXED_TIME_MODE, DAO);
 		
 		
-		progressLabel = (TextView)findViewById(R.id.progressLabel);
-		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel);
-		secondWordLabel = (TextView)findViewById(R.id.secondWordLabel);
-		timeLabel = (TextView)findViewById(R.id.timeLabel);
-		nextWordLabel = (ImageButton)findViewById(R.id.nextWordButton);
-		prevWordLabel = (ImageButton)findViewById(R.id.prevBtn);
+		progressLabel = (TextView)findViewById(R.id.progressLbl2);
+		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel2);
+		secondWordLabel = (TextView)findViewById(R.id.secondWordField2);
+		timeLabel = (TextView)findViewById(R.id.timeLabel2);
+		nextWordLabel = (Button)findViewById(R.id.nextWordButton);
+		prevWordLabel = (Button)findViewById(R.id.Button01);
+		progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+		timeBar = (ProgressBar) findViewById(R.id.timeBar2);
 
+		timeBar.setMax(gm.getTimeLimit());
 		prevWordLabel.setEnabled(false);
+		progressBar.setMax(gm.getWordCount());
 		updateLabels();
 		
-		new CountDownTimer(gm.getTimeLimit(), 1000) {
+		timer = new CountDownTimer(gm.getTimeLimit(), 1000) {
 			int i = 60;
 		     public void onTick(long millisUntilFinished) {
+		    	 timeBar.setProgress(gm.getTimeLimit()-(int)millisUntilFinished);
+		    	 timeRemaining =  millisUntilFinished;
 		    	 i--;
 		    	 if(i<10){
 			    	 timeLabel.setText((millisUntilFinished/1000)/60 + ":0"+ i);
@@ -85,16 +91,37 @@ public class LinkPhaseActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) { //Back key pressed
+	       //Things to Do
+	    	Intent intent = new Intent(LinkPhaseActivity.this, PauseScreen.class);
+	    	intent.putExtra("timeRemaining", timeRemaining);
+	    	startActivity(intent);
+	        return true;
+	    }else if((keyCode == KeyEvent.KEYCODE_MENU)){
+	    	Intent intent = new Intent(LinkPhaseActivity.this, PauseScreen.class);
+	    	intent.putExtra("timeRemaining", timeRemaining);
+	    	startActivity(intent);
+	    	return true;
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
+	
+	
+	
 	
 	public void nextWord(View v){
+		
 		prevWordLabel.setEnabled(true);
 		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
 			Intent intent = new Intent(this,QuizPhaseActivity.class);
 			intent.putExtra("gameModel",gm);
 			startActivity(intent);
+			finish();
 		}else{
 			if(gm.getCurrentWordIndex()+3==gm.getWordCount()){
-				//nextWordLabel.setText("Start Quiz!");
+				nextWordLabel.setText("Start Quiz!");
 			}
 			gm.nextWord();
 			updateLabels();
@@ -102,10 +129,10 @@ public class LinkPhaseActivity extends Activity {
 	}
 	
 	public void prevWord(View v){
-		if(gm.getCurrentWordIndex()==0)
+		if(gm.getCurrentWordIndex()==1)
 			prevWordLabel.setEnabled(false);
-		if(gm.getCurrentWordIndex()+3==gm.getWordCount()){
-			//nextWordLabel.setText("Next Word");
+		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
+			nextWordLabel.setText("Next Word");
 		}
 		gm.prevWord();
 		updateLabels();
@@ -113,7 +140,10 @@ public class LinkPhaseActivity extends Activity {
 	
 	public void updateLabels(){
 		//Progress
+		
+		
 		int progress = gm.getCurrentWordIndex()+1;
+		progressBar.setProgress(progress);
 		progressLabel.setText(progress+"/"+gm.getWordCount());
 		
 		//Words

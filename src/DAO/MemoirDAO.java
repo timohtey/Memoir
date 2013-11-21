@@ -164,6 +164,7 @@ public class MemoirDAO{
 			}while(unique==false);
 			uniqueWords.add(wordList.get(key));
 		}
+		uniqueWords.remove(0);
 		return uniqueWords;
 	}
 }

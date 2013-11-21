@@ -9,25 +9,35 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class QuizPhaseActivity extends Activity {
 
 	GameModel gm;
-	TextView quizTimeTextView;
-	TextView quizProgressTextView;
-	TextView quizFirstWordTextView;
-	EditText quizSecondWordTextField;
-	ImageButton goButton;
+	
+	TextView progressLabel;
+	TextView firstWordLabel;
+	TextView secondWordLabel;
+	TextView timeLabel;
+	TextView accuracyLbl;
+	Button nextWordLabel;
+	ProgressBar progressBar;
+	ProgressBar timeBar;
+	CountDownTimer timer;
+	long timeRemaining=0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_quiz_phase);
+		setContentView(R.layout.activity_quiz2_phase);
         
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
@@ -35,22 +45,31 @@ public class QuizPhaseActivity extends Activity {
         Intent i = getIntent();
         gm =  (GameModel)i.getSerializableExtra("gameModel");
         
-        quizTimeTextView = (TextView) findViewById(R.id.quizTimeLabel);
-        quizProgressTextView = (TextView) findViewById(R.id.quizProgressTextView);
-        quizFirstWordTextView = (TextView) findViewById(R.id.quizFirstWordTextView);
-        quizSecondWordTextField = (EditText)findViewById(R.id.quizSecondWordTextField);
-        goButton = (ImageButton)findViewById(R.id.goButton);
+        timeLabel = (TextView)findViewById(R.id.timeLabel2);
+		timeBar = (ProgressBar) findViewById(R.id.timeBar2);
+		
+        progressLabel = (TextView)findViewById(R.id.progressLabel2);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        accuracyLbl = (TextView)findViewById(R.id.accuracyLbl2);
         
+		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel2);
+		secondWordLabel = (EditText)findViewById(R.id.secondWordField2);
+		
+		timeBar.setMax(gm.getTimeLimit());
+		progressBar.setMax(gm.getWordCount());
+		
         gm.startQuizPhase();
         
-        new CountDownTimer(gm.getTimeLimit(), 1000) {
+        timer = new CountDownTimer(gm.getTimeLimit(), 1000) {
 			int i = 60;
 		     public void onTick(long millisUntilFinished) {
+		    	 timeBar.setProgress(gm.getTimeLimit()-(int)millisUntilFinished);
+		    	 timeRemaining =  millisUntilFinished;
 		    	 i--;
 		    	 if(i<10){
-		    		 quizTimeTextView.setText((millisUntilFinished/1000)/60 + ":0"+ i);
+			    	 timeLabel.setText((millisUntilFinished/1000)/60 + ":0"+ i);
 		    	 }
-		    	 else quizTimeTextView.setText((millisUntilFinished/1000)/60 + ":"+ i);
+		    	 else timeLabel.setText((millisUntilFinished/1000)/60 + ":"+ i);
 		    	 if(i == 0){
 		    		 i = 60;
 		    	 }
@@ -60,41 +79,50 @@ public class QuizPhaseActivity extends Activity {
 		     }
 
 		     public void onFinish() {
-		    	 //TODO: goto result screen
-		    	 gm.endQuizPhase(false);
+		    	 //TODO: Goto resultscreen
 		    	 Intent intent = new Intent(QuizPhaseActivity.this, AboutScreen.class);
+		    	 gm.endQuizPhase(false);
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
 		     }
 		  }.start();
 		  
+		  //OVERRIDE KEYBOARD DONE
+		  secondWordLabel.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+		        @Override
+		        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+		            if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+		            	String answer = secondWordLabel.getText().toString();
+		        		if(gm.answerQuiz(answer)){
+		        			updateLabels();
+		        			secondWordLabel.setText("");
+		        	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
+		        	        	gm.endQuizPhase(true);
+		        	        	finish();
+		        	        	//TODO: goto result screen
+		        	        }
+		        		}
+
+		                return true;
+		            }
+		            return false;
+		        }
+		    });
+		 
         updateLabels();
         
 	}
 	
-	public void onGo(View v){
-		String answer = quizSecondWordTextField.getText().toString();
-		if(gm.answerQuiz(answer)){
-			updateLabels();
-			quizSecondWordTextField.setText("");
-	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
-	        	gm.endQuizPhase(true);
-	        	//TODO: goto result screen
-	        }
-		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.quiz_phase, menu);
-		return true;
-	}
 	
 	public void updateLabels(){
 		int progress = gm.getCurrentWordIndex()+1;
-        quizProgressTextView.setText(progress+"/"+gm.getWordCount());
-        quizFirstWordTextView.setText(gm.getWordOne());
+		
+		accuracyLbl.setText(Integer.toString(gm.computeAccuracy()).concat("% Accuracy") );
+		progressBar.setProgress(progress);
+		progressLabel.setText(progress+"/"+gm.getWordCount() + " words");
+		firstWordLabel.setText(gm.getWordOne());
+		
 	}
 	
 	
