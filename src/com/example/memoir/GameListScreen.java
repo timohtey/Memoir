@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class GameListScreen extends Activity {
+	
+	private MediaPlayer buttonSound;
 	
 	private ImageButton beginLinkingButton;
 	private ImageButton customGameButton;
@@ -28,6 +31,8 @@ public class GameListScreen extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.hide();
         
+        buttonSound = MediaPlayer.create(GameListScreen.this, R.raw.button);
+        
         beginLinkingButton = (ImageButton) findViewById(R.id.beginLinkingButton);
         customGameButton = (ImageButton) findViewById(R.id.customGameButton);
         tutorialButton = (ImageButton) findViewById(R.id.tutorialButton);
@@ -39,6 +44,7 @@ public class GameListScreen extends Activity {
 		 beginLinkingButton.setOnClickListener(new OnClickListener(){    
 	            @Override
 				public void onClick(View v) {
+	            	buttonSound.start();
 	            	Intent myIntent = new Intent(GameListScreen.this, LinkPhaseActivity.class);
 	                startActivity(myIntent);
 				}
@@ -47,6 +53,7 @@ public class GameListScreen extends Activity {
 	        customGameButton.setOnClickListener(new OnClickListener(){    
 	            @Override
 				public void onClick(View v) {
+	            	buttonSound.start();
 	            	Intent myIntent = new Intent(GameListScreen.this, LinkPhaseUtility.class);
 	            	startActivity(myIntent);
 				}
@@ -55,6 +62,7 @@ public class GameListScreen extends Activity {
 	        tutorialButton.setOnClickListener(new OnClickListener(){    
 	            @Override
 				public void onClick(View v) {
+	            	buttonSound.start();
 //	            	Intent myIntent = new Intent(GameListScreen.this, StatisticsScreen.class);
 //	                startActivity(myIntent);
 				}

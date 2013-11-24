@@ -1,5 +1,6 @@
 package com.example.memoir;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	private MediaPlayer buttonSound;
+	
 	private ImageButton beginButton;
 	private ImageButton statisticsButton;
 	private ImageButton aboutButton;
@@ -23,6 +26,8 @@ public class MainActivity extends Activity {
         
         ActionBar actionBar = getActionBar();
         actionBar.hide();
+        
+        buttonSound = MediaPlayer.create(MainActivity.this, R.raw.button);
         
         beginButton = (ImageButton) findViewById(R.id.beginButton);
         statisticsButton = (ImageButton) findViewById(R.id.statisticsButton);
@@ -38,6 +43,7 @@ public class MainActivity extends Activity {
         beginButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
+            	buttonSound.start();
             	Intent myIntent = new Intent(MainActivity.this, GameListScreen.class);
                 startActivity(myIntent);
 			}
@@ -46,6 +52,7 @@ public class MainActivity extends Activity {
         statisticsButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
+            	buttonSound.start();
             	Intent myIntent = new Intent(MainActivity.this, StatisticsScreen.class);
                 startActivity(myIntent);
 			}
@@ -54,6 +61,7 @@ public class MainActivity extends Activity {
         aboutButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
+            	buttonSound.start();
             	Intent myIntent = new Intent(MainActivity.this, AboutScreen.class);
                 startActivity(myIntent);
 			}
