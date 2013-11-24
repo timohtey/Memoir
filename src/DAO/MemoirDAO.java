@@ -2,6 +2,8 @@ package DAO;
 import java.util.ArrayList;
 import java.util.Random;
 
+import DAO.StatisticsValues;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -37,6 +39,7 @@ public class MemoirDAO{
 	private static final String KEY_MINIGAME_NAME = "game_name";
 	private static final String KEY_ACCURACY = "accuracy";
 	private static final String KEY_WORD_AVERAGE = "words_average";
+	private static final String KEY_LEVEL = "level";
 		
 	private static final String DB_NAME =  "WordListDB";
 	private static final int DB_VERSION = 1;
@@ -51,11 +54,14 @@ public class MemoirDAO{
 	private static final String CREATE_TIPS_TABLE = "CREATE TABLE " +  TIPS_TABLE + " ( "
 			+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ KEY_TIP + " TEXT NOT NULL);";
+	
 	private static final String CREATE_STATISTICS_TABLE = "CREATE TABLE " + STATISTICS_TABLE + " ( "
 			+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ KEY_MINIGAME_NAME + " TEXT NOT NULL, " 
 			+ KEY_ACCURACY + " INTEGER, " 
-			+ KEY_WORD_AVERAGE + " INTEGER);";
+			+ KEY_WORD_AVERAGE + " INTEGER, "
+			+ KEY_LEVEL + " INTEGER);";
+	
 	private static final String CREATE_LINK_CUSTOM_TABLE = "CREATE TABLE " +  LINK_CUSTOM_TABLE + " ( "
 			+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ KEY_WORD + " TEXT NOT NULL);";
@@ -94,8 +100,8 @@ public class MemoirDAO{
 			
 			db.execSQL(CREATE_STATISTICS_TABLE);
 			db.execSQL("INSERT INTO " + STATISTICS_TABLE +
-					"(" + KEY_MINIGAME_NAME + ", " + KEY_ACCURACY + ", " + KEY_WORD_AVERAGE
-					+") VALUES (\"Linking Method\", null, null);");
+					"(" + KEY_MINIGAME_NAME + ", " + KEY_ACCURACY + ", " + KEY_WORD_AVERAGE + ", " + KEY_LEVEL
+					+") VALUES (\"Linking Method\", null, null, 1);");
 			
 			db.execSQL(CREATE_LINK_CUSTOM_TABLE);
 		}
@@ -194,9 +200,20 @@ public class MemoirDAO{
 				new String[] { String.valueOf(values.getId()) });
 	}
 	
-	public ArrayList<StatisticsValues> fetchStatistics(){
+	public int updateGameLevel(StatisticsValues values){
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+		ContentValues cValues = new ContentValues();
+		cValues.put(KEY_LEVEL, values.getLevel());
+
+		// updating row
+		return db.update(STATISTICS_TABLE, cValues, KEY_ID + " = ?",
+				new String[] { String.valueOf(values.getId()) });
+	}
+	
+public ArrayList<StatisticsValues> fetchStatistics(){
 		
-		String[] columns = new String[]{KEY_ID, KEY_MINIGAME_NAME, KEY_ACCURACY, KEY_WORD_AVERAGE};
+		String[] columns = new String[]{KEY_ID, KEY_MINIGAME_NAME, KEY_ACCURACY, KEY_WORD_AVERAGE, KEY_LEVEL};
 		Cursor c = ourDatabase.query(STATISTICS_TABLE, columns, null, null, null, null, KEY_ID);
 		ArrayList<StatisticsValues> values = new ArrayList<StatisticsValues>();
 		int index = 0;
@@ -205,6 +222,7 @@ public class MemoirDAO{
 		int iName = c.getColumnIndex(KEY_MINIGAME_NAME);
 		int iAccuracy = c.getColumnIndex(KEY_ACCURACY);
 		int iAverage = c.getColumnIndex(KEY_WORD_AVERAGE);
+		int iLevel = c.getColumnIndex(KEY_LEVEL);
 		
 		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
             values.add(new StatisticsValues());
@@ -212,6 +230,7 @@ public class MemoirDAO{
             values.get(index).setGameName(c.getString(iName));
             values.get(index).setAccuracy(c.getInt(iAccuracy));
             values.get(index).setWordAverage(c.getInt(iAverage));
+            values.get(index).setLevel(c.getInt(iLevel));
             index++;
         }
 		

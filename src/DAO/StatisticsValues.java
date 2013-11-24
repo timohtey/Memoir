@@ -6,6 +6,7 @@ public class StatisticsValues {
 	private String gameName;
 	private int accuracy;
 	private int wordAverage;
+	private int level;
 	
 	public int getId() {
 		return id;
@@ -31,7 +32,12 @@ public class StatisticsValues {
 	public void setWordAverage(int wordAverage) {
 		this.wordAverage = wordAverage;
 	}
-	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	
 	
 }
