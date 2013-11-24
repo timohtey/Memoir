@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class MemoirDAO{
 	
@@ -23,7 +22,7 @@ public class MemoirDAO{
 	private static final String WORD_TABLE = "WordList";
 	private static final String TIPS_TABLE = "TipList";
 	private static final String STATISTICS_TABLE = "Statistics";
-	//private static final String STATISTICSTABLE =  "Statistics";
+	private static final String LINK_CUSTOM_TABLE = "LinkCustom";
 	
 	//Id column name
 	private static final String KEY_ID = "_id";
@@ -57,6 +56,9 @@ public class MemoirDAO{
 			+ KEY_MINIGAME_NAME + " TEXT NOT NULL, " 
 			+ KEY_ACCURACY + " INTEGER, " 
 			+ KEY_WORD_AVERAGE + " INTEGER);";
+	private static final String CREATE_LINK_CUSTOM_TABLE = "CREATE TABLE " +  LINK_CUSTOM_TABLE + " ( "
+			+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ KEY_WORD + " TEXT NOT NULL);";
 
 	private static class DbHelper extends SQLiteOpenHelper{
 
@@ -89,12 +91,21 @@ public class MemoirDAO{
 				db.execSQL("INSERT INTO " + TIPS_TABLE +
 						"(" + KEY_TIP + ") VALUES (\"" + tipList.get(i) + "\");");	
 			}
+			
+			db.execSQL(CREATE_STATISTICS_TABLE);
+			db.execSQL("INSERT INTO " + STATISTICS_TABLE +
+					"(" + KEY_MINIGAME_NAME + ", " + KEY_ACCURACY + ", " + KEY_WORD_AVERAGE
+					+") VALUES (\"Linking Method\", null, null);");
+			
+			db.execSQL(CREATE_LINK_CUSTOM_TABLE);
 		}
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			db.execSQL("DROP TABLE IF EXISTS " + WORD_TABLE);
 			db.execSQL("DROP TABLE IF EXISTS " + TIPS_TABLE);
+			db.execSQL("DROP TABLE IF EXISTS " + STATISTICS_TABLE);
+			db.execSQL("DROP TABLE IF EXISTS " + LINK_CUSTOM_TABLE);
 			onCreate(db);
 			
 		}
@@ -115,14 +126,32 @@ public class MemoirDAO{
 		dbHelper.close();
 	}
 	
-	/*
-	public long insertWordEntry(String word){
+	public void insertWordEntry(ArrayList<String> customWords){
 		
-		ContentValues cv = new ContentValues();
-		cv.put(KEY_WORD, word);
-		return ourDatabase.insert(WORD_TABLE, KEY_WORD, cv);
+		for(int i = 0 ; i < customWords.size(); i++){
+			ourDatabase.execSQL("INSERT INTO " + LINK_CUSTOM_TABLE +
+						"(" + KEY_WORD + ") VALUES ('" + customWords.get(i) + "');");
+		}
 	}
-	*/
+	
+	public ArrayList<String> fetchLinkCustomWords(){
+		
+		String[] columns = new String[]{KEY_ID, KEY_WORD};
+		Cursor c = ourDatabase.query(LINK_CUSTOM_TABLE, columns, null, null, null, null, KEY_ID);
+		ArrayList<String> customWordList = new ArrayList<String>();
+		
+		int iWord = c.getColumnIndex(KEY_WORD);
+		
+		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+			customWordList.add(c.getString(iWord));
+		}
+		return customWordList;
+	}
+	
+	public void deleteCustomWordList() {
+		
+	    ourDatabase.execSQL("DELETE FROM " + LINK_CUSTOM_TABLE + " WHERE " + KEY_ID + " > 0");
+	}
 	
 	public ArrayList<String> getWordList(int n){
 		Random random = new Random();
@@ -189,30 +218,4 @@ public class MemoirDAO{
 		return values;
 	}
 	
-	public String fetchWordData(String type){
-		
-		String table = null;
-		String tableColumn = null;
-		
-		if(type.equals("words")){
-			table = WORD_TABLE; 
-			tableColumn = KEY_WORD; 
-		}
-		else if(type.equals("tips")){
-			table = TIPS_TABLE; 
-			tableColumn = KEY_TIP;
-		}
-		
-		String[] columns = new String[]{KEY_ID, tableColumn};
-		Cursor c = ourDatabase.query(table, columns, null, null, null, null, KEY_ID);
-		String result = "";
-		
-		int iRow = c.getColumnIndex(KEY_ID);
-		int iWord = c.getColumnIndex(tableColumn);
-		
-		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
-			result += c.getString(iRow) + " " + c.getString(iWord) +"\n";
-		}
-		return result;
-	}
 }
