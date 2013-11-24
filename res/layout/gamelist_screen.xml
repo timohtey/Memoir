@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout3"
     android:layout_width="match_parent"
+    android:background ="#3498DB"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
@@ -15,18 +16,15 @@
         android:src="@drawable/link_method_backdrop" />
 
     <ImageButton
-        android:id="@+id/beginLinkingButton"
+        android:id="@+id/tutorialButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/goBtn"
-        android:layout_alignRight="@+id/goBtn"
-        android:layout_alignTop="@+id/goBtn"
-        android:layout_marginBottom="39dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="85dp"
-        android:layout_toRightOf="@+id/tutorialButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/customGameButton"
+        android:layout_marginLeft="57dp"
+        android:background="@null"
         android:scaleType="centerInside"
-        android:src="@drawable/begin_linking" />
+        android:src="@drawable/tutorial_button" />
 
     <ImageButton
         android:id="@+id/customGameButton"
@@ -34,19 +32,21 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/goBtn"
         android:layout_alignLeft="@+id/beginLinkingButton"
-        android:layout_alignRight="@+id/goBtn"
-        android:layout_marginRight="10dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginTop="5dp"
+        android:background="@null"
         android:scaleType="centerInside"
         android:src="@drawable/custom_game" />
 
     <ImageButton
-        android:id="@+id/tutorialButton"
+        android:id="@+id/beginLinkingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/customGameButton"
-        android:layout_marginLeft="46dp"
+        android:layout_above="@+id/customGameButton"
+        android:layout_marginLeft="10sp"
+        android:layout_toRightOf="@+id/tutorialButton"
+        android:background="@null"
         android:scaleType="centerInside"
-        android:src="@drawable/tutorial_button" />
+        android:src="@drawable/begin_linking" />
 
 </RelativeLayout>

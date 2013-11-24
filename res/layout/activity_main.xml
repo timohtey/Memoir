@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" xmlns:android1="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    android1:background="#3498DB" >
 
     <ImageView
         android1:id="@+id/goBtn"
@@ -10,49 +12,62 @@
         android1:layout_height="187dp"
         android1:layout_gravity="center_horizontal"
         android1:layout_marginTop="30sp"
+        android1:background ="#3498DB"
         android1:src="@drawable/brain_logo" />
 
-    <TextView
-        android1:id="@+id/enterTextView"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_gravity="center_horizontal"
-        android1:layout_marginTop="10sp"
-        android1:text="Memoir"
-        android1:textSize="50sp" />
+    <LinearLayout
+        android1:layout_width="match_parent"
+        android1:layout_height="match_parent"
+        android1:background="#3498DB"
+        android1:orientation="vertical" >
 
-    <ImageButton
-        android1:id="@+id/beginButton"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_gravity="center_vertical|center_horizontal"
-        android1:layout_marginTop="30sp"
-        android1:background="@null"
-        android1:src="@drawable/begin_button" />
+        <TextView
+            android1:id="@+id/memoirTextView"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical|center_horizontal"
+            android1:layout_marginTop="5sp"
+            android1:text="Memoir"
+            android1:textColor="#FFFF"
+            android1:textSize="50sp" />
 
-    <ImageButton
-        android1:id="@+id/statisticsButton"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_gravity="center_vertical|center_horizontal"
-        android1:background="@null"
-        android1:src="@drawable/statistics_button" />
+        <ImageButton
+            android1:id="@+id/beginButton"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical|center_horizontal"
+            android1:layout_marginTop="15sp"
+            android1:background="@null"
+            android1:src="@drawable/begin_button" />
 
-    <ImageButton
-        android1:id="@+id/aboutButton"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_gravity="center_vertical|center_horizontal"
-        android1:background="@null"
-        android1:src="@drawable/about_button" />
+        <ImageButton
+            android1:id="@+id/statisticsButton"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical|center_horizontal"
+            android1:layout_marginTop="15sp"
+            android1:background="@null"
+            android1:src="@drawable/statistics_button" />
 
-    <TextView
-        android1:id="@+id/nameText"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_gravity="center_vertical|center_horizontal"
-        android1:layout_marginTop="30sp"
-        android1:text="Hello, Timothy."
-        android1:textSize="20sp" />
+        <ImageButton
+            android1:id="@+id/aboutButton"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical|center_horizontal"
+            android1:layout_marginTop="15sp"
+            android1:background="@null"
+            android1:src="@drawable/about_button" />
+
+        <TextView
+            android1:id="@+id/nameText"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical|center_horizontal"
+            android1:layout_marginTop="30sp"
+            android1:text="Hello, Timothy."
+            android1:textColor="#ffff"
+            android1:textSize="20sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

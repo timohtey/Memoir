@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3498DB"
     android:orientation="vertical" >
 
     <ImageView
@@ -9,59 +10,62 @@
         android:layout_width="84dp"
         android:layout_height="84dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="30sp"
         android:src="@drawable/brain_logo" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="20sp"
-        android:background="#95A5A6"
+        android:background="#3498DB"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/enterTextView"
+            android:id="@+id/gamePausedTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="10sp"
             android:text="GAME PAUSED"
-            android:textColor="#ffff"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textColor="#ffff" />
+
+        <ImageButton
+            android:id="@+id/resumeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="20sp"
+            android:background="@null"
+            android:src="@drawable/resume_button" />
+
+        <ImageButton
+            android:id="@+id/restartButton"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="20sp"
+            android:background="@null"
+            android:src="@drawable/restart_button" />
+
+        <ImageButton
+            android:id="@+id/settingsButton"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="20sp"
+            android:background="@null"
+            android:src="@drawable/settings_button" />
+
+        <ImageButton
+            android:id="@+id/exitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="20sp"
+            android:layout_weight="0.18"
+            android:background="@null"
+            android:src="@drawable/exit_to_menu" />
 
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/resumeButton"
-        android:layout_width="156dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="30sp"
-        android:src="@drawable/resume_button" />
-
-    <ImageButton
-        android:id="@+id/restartButton"
-        android:layout_width="156dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="10sp"
-        android:src="@drawable/restart_button" />
-
-    <ImageButton
-        android:id="@+id/settingsButton"
-        android:layout_width="156dp"
-        android:layout_height="64dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginBottom="10sp"
-        android:layout_marginTop="10sp"
-        android:src="@drawable/settings_button" />
-
-    <ImageButton
-        android:id="@+id/exitButton"
-        android:layout_width="153dp"
-        android:layout_height="62dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:src="@drawable/exit_to_menu" />
 
 </LinearLayout>

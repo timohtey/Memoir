@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +20,7 @@ public class MainActivity extends Activity {
 	private ImageButton statisticsButton;
 	private ImageButton aboutButton;
 	private TextView nameText;
+	private TextView memoir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +31,15 @@ public class MainActivity extends Activity {
         
         buttonSound = MediaPlayer.create(MainActivity.this, R.raw.button);
         
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Canter/Canter Bold.otf");
+        
         beginButton = (ImageButton) findViewById(R.id.beginButton);
         statisticsButton = (ImageButton) findViewById(R.id.statisticsButton);
         nameText = (TextView) findViewById(R.id.nameText);
+        memoir = (TextView) findViewById(R.id.memoirTextView);
         aboutButton = (ImageButton) findViewById(R.id.aboutButton);
+        memoir.setTypeface(myTypeface);
+        memoir.setTextSize(100);
         
         addListeners();
         

@@ -4,11 +4,13 @@ import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class PauseScreen extends Activity{
 	
@@ -17,6 +19,7 @@ public class PauseScreen extends Activity{
 	private ImageButton settingsButton;
 	private ImageButton exitButton;
 	private GameModel gm;
+	private TextView gamePaused;
 	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +31,15 @@ public class PauseScreen extends Activity{
         Intent i = getIntent();
         gm =  (GameModel)i.getSerializableExtra("gameModel");
         
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Canter/Canter Bold.otf");
         
         resumeButton = (ImageButton) findViewById(R.id.resumeButton);
         restartButton = (ImageButton) findViewById(R.id.restartButton);
         settingsButton = (ImageButton) findViewById(R.id.settingsButton);
         exitButton = (ImageButton) findViewById(R.id.exitButton);
+        gamePaused = (TextView) findViewById(R.id.gamePausedTxt);
+        gamePaused.setTypeface(myTypeface);
+        gamePaused.setTextSize(70);
         
         addListeners();
         
