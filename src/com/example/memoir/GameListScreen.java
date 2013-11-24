@@ -54,7 +54,7 @@ public class GameListScreen extends Activity {
 	            @Override
 				public void onClick(View v) {
 	            	buttonSound.start();
-	            	Intent myIntent = new Intent(GameListScreen.this, LinkPhaseUtility.class);
+	            	Intent myIntent = new Intent(GameListScreen.this, LinkPhaseUtility_Start.class);
 	            	startActivity(myIntent);
 				}
 	        }); 

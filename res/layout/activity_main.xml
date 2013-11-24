@@ -50,7 +50,7 @@
             android1:src="@drawable/statistics_button" />
 
         <ImageButton
-            android1:id="@+id/aboutButton"
+            android1:id="@+id/ScrollView"
             android1:layout_width="wrap_content"
             android1:layout_height="wrap_content"
             android1:layout_gravity="center_vertical|center_horizontal"

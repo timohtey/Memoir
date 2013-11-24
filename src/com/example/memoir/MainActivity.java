@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         statisticsButton = (ImageButton) findViewById(R.id.statisticsButton);
         nameText = (TextView) findViewById(R.id.nameText);
         memoir = (TextView) findViewById(R.id.memoirTextView);
-        aboutButton = (ImageButton) findViewById(R.id.aboutButton);
+        aboutButton = (ImageButton) findViewById(R.id.ScrollView);
         memoir.setTypeface(myTypeface);
         memoir.setTextSize(100);
         
