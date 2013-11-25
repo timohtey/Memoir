@@ -1,6 +1,8 @@
 package com.example.memoir;
 
 import java.util.ArrayList;
+
+import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
@@ -36,6 +38,7 @@ public class LinkPhaseUtility_Start	extends Activity {
 	        
 	        ActionBar actionBar = this.getActionBar();
 	        actionBar.hide();
+	        
 	        // Set up ListView example
 	        for(int i = 0; i <10; i++){
 	        	if(i %2== 0){
@@ -46,6 +49,12 @@ public class LinkPhaseUtility_Start	extends Activity {
 	        	}
 	        }
 
+	        Bundle extras = getIntent().getExtras();
+		    if(extras != null){
+		    	String newWord = extras.getString(("customWords"));
+            	arrayList.add(newWord);
+		    }
+		    
 	        mAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, arrayList);
 	        lv.setAdapter(mAdapter);  
 	       
@@ -93,8 +102,6 @@ public class LinkPhaseUtility_Start	extends Activity {
 	            		}
        				 }
 	            	customWordsArray.add(customWords);
-	            	customWordsArray.add("egg");
-	            	customWordsArray.add("nog");
 	                Intent myIntent = new Intent(LinkPhaseUtility_Start.this, LinkPhaseActivity.class);
 	                myIntent.putStringArrayListExtra("customWords", customWordsArray);
 		            startActivity(myIntent);
