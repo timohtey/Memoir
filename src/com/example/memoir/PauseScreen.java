@@ -49,8 +49,8 @@ public class PauseScreen extends Activity{
 		resumeButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-            	Intent myIntent = new Intent(PauseScreen.this, LinkPhaseActivity.class);
-                startActivity(myIntent);
+//            	Intent myIntent = new Intent(PauseScreen.this, LinkPhaseActivity.class);
+//              startActivity(myIntent);
 			}
         }); 
 		
@@ -61,7 +61,7 @@ public class PauseScreen extends Activity{
             	if(gm.isGameRecorded()){
                 	gm.recordGame();
                 }
-            	Intent myIntent = new Intent(PauseScreen.this, PauseScreen.class);
+            	Intent myIntent = new Intent(PauseScreen.this, LinkPhaseActivity.class);
                 startActivity(myIntent);
                 
                 finish();
@@ -72,7 +72,8 @@ public class PauseScreen extends Activity{
             @Override
 			public void onClick(View v) {
             	Intent myIntent = new Intent(PauseScreen.this, PauseScreen.class);
-                startActivity(myIntent);
+        
+            	startActivity(myIntent);
 			}
         }); 
 		

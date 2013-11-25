@@ -1,5 +1,7 @@
 package com.example.memoir;
 
+import java.util.ArrayList;
+
 import DAO.MemoirDAO;
 import Model.GameModel;
 import android.app.ActionBar;
@@ -34,12 +36,16 @@ public class LinkPhaseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_link_phase);
-		
-		
+				
 		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
-		gm = new GameModel(GameModel.FIXED_TIME_MODE, DAO);
+	    Bundle extras = getIntent().getExtras();
+	    if(extras != null){
+	    	ArrayList<String> arrayB = extras.getStringArrayList("customWords");
+	    	gm = new GameModel(GameModel.FIXED_TIME_MODE, arrayB);
+	    }
+	    else gm = new GameModel(GameModel.FIXED_TIME_MODE, DAO);
 		
 		
 		progressLabel = (TextView)findViewById(R.id.progressLbl2);

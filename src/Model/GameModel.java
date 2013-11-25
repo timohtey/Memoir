@@ -41,6 +41,16 @@ public class GameModel implements Serializable{
 		System.out.println("test");
 	}
 	
+	public GameModel(int mode, ArrayList<String> array){
+		this.mode = mode;
+		setDifficulty(mode);
+		
+		//get words
+		wordList = array;
+		wordCount= array.size();
+		System.out.println("test");
+	}
+	
 	public void setDifficulty(int mode){
 		switch(mode){
 		case FIXED_TIME_MODE : 

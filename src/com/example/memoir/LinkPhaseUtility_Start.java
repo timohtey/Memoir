@@ -3,6 +3,7 @@ package com.example.memoir;
 import java.util.ArrayList;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -77,7 +78,26 @@ public class LinkPhaseUtility_Start	extends Activity {
 	        {
 	            @Override
 	            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3){
-	                  int positionIndex = (Integer) adapter.getItemAtPosition(position); 
+	            	String positionStr = adapter.getItemAtPosition(position).toString();
+	            	ArrayList<String> customWordsArray = new ArrayList<String>();
+	            	StringBuilder temp = new StringBuilder(positionStr);
+	            	String customWords = "";         	
+	            	for(int i = 0; i < temp.length(); i++){
+	            		if(temp.charAt(i) == ' ' || temp.charAt(i) == ','){
+	            			if(customWords.equals("") == false){
+		            		  customWordsArray.add(customWords);
+	            			}
+	            			customWords = "";
+	            		}else {
+	            			customWords += temp.charAt(i);
+	            		}
+       				 }
+	            	customWordsArray.add(customWords);
+	            	customWordsArray.add("egg");
+	            	customWordsArray.add("nog");
+	                Intent myIntent = new Intent(LinkPhaseUtility_Start.this, LinkPhaseActivity.class);
+	                myIntent.putStringArrayListExtra("customWords", customWordsArray);
+		            startActivity(myIntent);
 	            }
 	         });
 	        
@@ -89,11 +109,4 @@ public class LinkPhaseUtility_Start	extends Activity {
 				}
 	        }); 
 	    }
-
-	    
-	  /* protected void onListItemClick(ListView lv, View view, int position, long id) {
-	        Toast.makeText(this,
-	                "Clicked " + getListAdapter().getItem(position).toString(),
-	                Toast.LENGTH_SHORT).show();
-	    }*/
 }
