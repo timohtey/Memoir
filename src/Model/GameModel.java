@@ -28,6 +28,7 @@ public class GameModel implements Serializable{
 	private int tryCount = 0;
 	private int correctCount = 0;
 	
+	private long timeFinished =0;
 	private boolean isGameRecorded = false;
 	//declare time finished;
 	
@@ -112,6 +113,16 @@ public class GameModel implements Serializable{
 			return 0;
 		return (int)Math.round((float)correctCount / tryCount*100);
 	}
+	
+	public float computeWordPerMin(){
+		if(tryCount==0)
+			return 0;
+		return Math.round(wordCount/((float)(timeFinished/1000)/60));
+	}
+	
+	public int getLinkLevel(){
+		return linkLevel;
+	}
 
 	public void startQuizPhase(){
 		currentWordIndex =0;
@@ -123,8 +134,9 @@ public class GameModel implements Serializable{
 		return isGameRecorded;
 	}
 	
-	public void endQuizPhase(boolean isFinished){
+	public void endQuizPhase(boolean isFinished,Long timeFinished){
 		int remainingWords = getWordCount() - getCurrentWordIndex()+1;
+		this.timeFinished = timeFinished;
 		tryCount += remainingWords;
 		if(isFinished){
 			linkLevel++;
@@ -141,11 +153,5 @@ public class GameModel implements Serializable{
 			linkLevel-=1;
 			
 		}
-		
-		recordGame();
-	}
-	
-	public void recordGame(){
-		//TODO: record the game
 	}
 } 

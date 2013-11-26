@@ -55,18 +55,10 @@ public class PauseScreen extends Activity{
 	private void addListeners(){
 		resumeButton.setOnClickListener(new OnClickListener(){    
             @Override
-            /*RESUME
-             * send time remaining to prev activity
-             * go back to prev activity
-             */
 			public void onClick(View v) {
-//            	Intent myIntent = new Intent(PauseScreen.this, LinkPhaseActivity.class);
-//              startActivity(myIntent);
             	Intent intent = new Intent();
             	intent.putExtra("timeRemaining", timeRemaining);
             	setResult(RESULT_OK,intent);
-            	//intent.replaceExtras(new Intent().putExtra("timeRemaining", (long) 5));
-            	
             	finish();
 			}
         }); 
@@ -74,12 +66,7 @@ public class PauseScreen extends Activity{
 		restartButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-            	
-            	if(gm.isGameRecorded()){
-                	gm.recordGame();
-                }
                 setResult(2);
-                
                 finish();
 			}
         }); 
@@ -96,17 +83,8 @@ public class PauseScreen extends Activity{
 		exitButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-            	if(gm!=null)
-            		Log.d("random", "isRecordGame value:"+ gm.isGameRecorded());
-            	else
-            		Log.d("random", "elsed");
-            	if(gm.isGameRecorded()){
-                 	gm.recordGame();
-                }
             	//TODO: Record game
-            	
-            	setResult(4,getIntent());
-               
+            	setResult(4);
                 finish();
 			}
         }); 
@@ -118,7 +96,6 @@ public class PauseScreen extends Activity{
 			Intent intent = new Intent();
         	intent.putExtra("timeRemaining", timeRemaining);
         	setResult(RESULT_OK,intent);
-        	//intent.replaceExtras(new Intent().putExtra("timeRemaining", (long) 5));
         	finish();
 	        return true;
 		}

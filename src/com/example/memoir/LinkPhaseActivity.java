@@ -163,19 +163,20 @@ public class LinkPhaseActivity extends Activity {
 				     }
 
 				     public void onFinish() {
-				    	 Intent intent = new Intent(LinkPhaseActivity.this, QuizPhaseActivity.class);
+				    	 Intent intent = new Intent(LinkPhaseActivity.this, CountDown.class);
 				    	 intent.putExtra("gameModel",gm);
 				    	 startActivity(intent);
 				     }
 				  }.start();
 			}else if( resultCode == 2){
 				//restart
+				//TODO: restart
 				Intent intent = new Intent(LinkPhaseActivity.this, LinkPhaseActivity.class);
-		    	 startActivity(intent);
+		    	startActivity(intent);
 		    	 finish();
 			}else if(resultCode == 3){
 				//settings
-				
+				//TODO: settings
 			}else if( resultCode == 4){
 				//EXIT
 				finish();

@@ -188,6 +188,19 @@ public class MemoirDAO{
 		return index;
 	}
 	
+	public int getLastStatisticIndex(){
+		int index = 0;
+		String[] column = new String[]{KEY_ID};
+		Cursor c = ourDatabase.query(STATISTICS_TABLE, column, null, null, null, null, KEY_ID);
+		
+		int iRow = c.getColumnIndex(KEY_ID);
+		
+		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+			index = c.getInt(iRow);
+		}
+		return index;
+	}
+	
 	public ArrayList<String> fetchLinkCustomWords(int index){
 		
 		ArrayList<Integer> wordIds = new ArrayList<Integer>();
@@ -254,9 +267,10 @@ public class MemoirDAO{
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 		ContentValues cValues = new ContentValues();
+		cValues.put(KEY_MINIGAME_NAME, values.getGameName());
 		cValues.put(KEY_ACCURACY, values.getAccuracy());
 		cValues.put(KEY_WORD_AVERAGE, values.getWordAverage());
-
+		cValues.put(KEY_LEVEL, values.getLevel());
 		// updating row
 		return db.update(STATISTICS_TABLE, cValues, KEY_ID + " = ?",
 				new String[] { String.valueOf(values.getId()) });
