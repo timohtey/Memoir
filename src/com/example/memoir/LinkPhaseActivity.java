@@ -7,7 +7,6 @@ import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.KeyEvent;
@@ -19,8 +18,6 @@ import android.widget.TextView;
 
 public class LinkPhaseActivity extends Activity {
 
-	MediaPlayer buttonSound;
-	MediaPlayer clockSound;
 	
 	GameModel gm;
 	TextView progressLabel;
@@ -40,11 +37,6 @@ public class LinkPhaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_link_phase);
 				
-		buttonSound = MediaPlayer.create(LinkPhaseActivity.this, R.raw.button);
-		clockSound = MediaPlayer.create(LinkPhaseActivity.this, R.raw.clock);
-		clockSound.setLooping(true);
-		clockSound.start();
-		
 		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
@@ -138,7 +130,6 @@ public class LinkPhaseActivity extends Activity {
 				nextWordLabel.setText("Start Quiz!");
 			}
 			gm.nextWord();
-			buttonSound.start();
 			updateLabels();
 		}
 	}
@@ -150,7 +141,6 @@ public class LinkPhaseActivity extends Activity {
 			nextWordLabel.setText("Next Word");
 		}
 		gm.prevWord();
-		buttonSound.start();
 		updateLabels();
 	}
 	
@@ -166,14 +156,5 @@ public class LinkPhaseActivity extends Activity {
 		firstWordLabel.setText(gm.getWordOne());
 		secondWordLabel.setText(gm.getWordTwo());
 	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		clockSound.release();
-	}
-	
-	
 	
 }
