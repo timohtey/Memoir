@@ -12,7 +12,7 @@
         android:background="#9b59b6" >
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/tutorialButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/box" />
