@@ -64,7 +64,9 @@ public class PauseScreen extends Activity{
 		restartButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-                setResult(2);
+            	Intent intent = new Intent();
+            	intent.putExtra("timeRemaining", timeRemaining);
+            	setResult(2,intent);
                 finish();
 			}
         }); 
@@ -81,8 +83,9 @@ public class PauseScreen extends Activity{
 		exitButton.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-            	//TODO: Record game
-            	setResult(4);
+            	Intent intent = new Intent();
+            	intent.putExtra("timeRemaining", timeRemaining);
+            	setResult(4,intent);
                 finish();
 			}
         }); 

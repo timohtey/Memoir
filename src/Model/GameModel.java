@@ -13,7 +13,7 @@ public class GameModel implements Serializable{
 	public static final int WORD_DIFFICULTY_INCREMENT = 5;
 	public static final int TIME_DIFFICULTY_INCREMENT = 10000;
 	public static final int INITIAL_WORD_COUNT= 10;
-	public static final int INITIAL_TIME_LIMIT = 300000;
+	public static final int INITIAL_TIME_LIMIT = 60000;
 	
 	//Difficulty
 	//TODO: save level in db;
@@ -117,7 +117,7 @@ public class GameModel implements Serializable{
 	public float computeWordPerMin(){
 		if(tryCount==0)
 			return 0;
-		return Math.round(wordCount/((float)(timeFinished/1000)/60));
+		return Math.round(correctCount/((float)(timeFinished/1000)/60));
 	}
 	
 	public int getLinkLevel(){
@@ -143,13 +143,13 @@ public class GameModel implements Serializable{
 			if(computeAccuracy()==1.0){
 				linkLevel++;
 			}
-		}else if(remainingWords/getWordCount()>= .75){
+		}else if(remainingWords/getWordCount()>= .75 && linkLevel>=4){
 			linkLevel-=3;
 			
-		}else if(remainingWords/getWordCount()>= .5){
+		}else if(remainingWords/getWordCount()>= .5&& linkLevel>=3){
 			linkLevel-=2;
 			
-		}else if(remainingWords/getWordCount()>= .25){
+		}else if(remainingWords/getWordCount()>= .25&& linkLevel>=2){
 			linkLevel-=1;
 			
 		}

@@ -126,6 +126,7 @@ public class QuizPhaseActivity extends Activity {
 			       		    	 }*/
 			       		    	 intent.putExtra("gameModel",gm);
 			       		    	 startActivity(intent);
+			       		    	 timer.cancel();
 			       		    	 finish();
 		        	        	//TODO: goto result screen
 		        	        }
@@ -145,8 +146,9 @@ public class QuizPhaseActivity extends Activity {
 	}
 	
 	public void finishByTime(){
+		timer.cancel();
 		Intent intent = new Intent(QuizPhaseActivity.this, ResultScreen.class);
-	   	 gm.endQuizPhase(false,(long)gm.getTimeLimit());
+	   	 gm.endQuizPhase(false,timeRemaining);
 	   	 /*
 	   	 {	//RECORD GAME
 	   		 int id = DAO.getLastStatisticIndex()+1;
@@ -185,7 +187,6 @@ public class QuizPhaseActivity extends Activity {
 		
 		if(requestCode ==0){
 			if(resultCode == RESULT_OK){
-				
 				timeRemainingStatic = data.getLongExtra("timeRemaining", 300000);
 				timeBar.setMax((int)timeRemaining);
 				Log.d("pauseTest","timeRemaining global: "+ timeRemaining);
@@ -217,16 +218,12 @@ public class QuizPhaseActivity extends Activity {
 				//restart
 				//TODO: restart
 				finishByTime();
-				Intent intent = new Intent(QuizPhaseActivity.this, LinkPhaseActivity.class);
-		    	startActivity(intent);
-		    	 finish();
 			}else if(resultCode == 3){
 				//settings
 				//TODO: settings
 			}else if( resultCode == 4){
 				//EXITT
 				finishByTime();
-				finish();
 			}
 		}
 	}
@@ -235,6 +232,7 @@ public class QuizPhaseActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		//clockSound.start();
 	}
 	
 	public void updateLabels(){

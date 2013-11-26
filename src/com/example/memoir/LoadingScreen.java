@@ -45,6 +45,7 @@ public class LoadingScreen extends Activity{
 			     public void onFinish() {
 			    	 Intent intent = new Intent(LoadingScreen.this, LinkPhaseActivity.class);
 			    	 startActivity(intent);
+			    	 finish();
 			     }
 			  }.start();
 

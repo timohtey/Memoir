@@ -94,6 +94,8 @@ public class LinkPhaseActivity extends Activity {
 		    	 Intent intent = new Intent(LinkPhaseActivity.this, CountDown.class);
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
+		    	 timer.cancel();
+		    	 finish();
 		     }
 		  }.start();
 		  
@@ -138,7 +140,6 @@ public class LinkPhaseActivity extends Activity {
 		
 		if(requestCode ==0){
 			if(resultCode == RESULT_OK){
-				
 				timeRemainingStatic = data.getLongExtra("timeRemaining", 300000);
 				timeBar.setMax((int)timeRemaining);
 				Log.d("pauseTest","timeRemaining global: "+ timeRemaining);
@@ -166,6 +167,9 @@ public class LinkPhaseActivity extends Activity {
 				    	 Intent intent = new Intent(LinkPhaseActivity.this, CountDown.class);
 				    	 intent.putExtra("gameModel",gm);
 				    	 startActivity(intent);
+				    	 timer.cancel();
+				    	 finish();
+				    	 
 				     }
 				  }.start();
 			}else if( resultCode == 2){
@@ -173,12 +177,14 @@ public class LinkPhaseActivity extends Activity {
 				//TODO: restart
 				Intent intent = new Intent(LinkPhaseActivity.this, LinkPhaseActivity.class);
 		    	startActivity(intent);
+		    	timer.cancel();
 		    	 finish();
 			}else if(resultCode == 3){
 				//settings
 				//TODO: settings
 			}else if( resultCode == 4){
 				//EXIT
+				timer.cancel();
 				finish();
 			}
 		}
@@ -227,6 +233,12 @@ public class LinkPhaseActivity extends Activity {
 		secondWordLabel.setText(gm.getWordTwo());
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//clockSound.start();
+	}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
