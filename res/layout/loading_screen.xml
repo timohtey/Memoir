@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:background="#9b59b6" >
+
+        <ImageView
+            android:id="@+id/tutorialButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/box" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/brain_logo" />
+
+        <TextView
+            android:id="@+id/loadingTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar1"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="NOW LOADING..."
+            android:textColor="#ffff"
+            android:textSize="30sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="55dp" />
+
+        <TextView
+            android:id="@+id/dailyTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:layout_toLeftOf="@+id/progressBar1"
+            android:text="DAILY TIP"
+            android:textColor="#ffff"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tipTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/dailyTip"
+            android:layout_below="@+id/dailyTip"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="21dp"
+            android:text="No tip for you sucker."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#2c3e50" />
+
+    </RelativeLayout>
+
+</LinearLayout>

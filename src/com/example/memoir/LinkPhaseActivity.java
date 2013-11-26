@@ -7,6 +7,7 @@ import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 public class LinkPhaseActivity extends Activity {
 
+	MediaPlayer clockSound;
+	MediaPlayer buttonSound;
 	
 	GameModel gm;
 	TextView progressLabel;
@@ -39,6 +42,11 @@ public class LinkPhaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_link_phase);
 				
+		buttonSound = MediaPlayer.create(LinkPhaseActivity.this, R.raw.button);
+		clockSound = MediaPlayer.create(LinkPhaseActivity.this, R.raw.clock);
+		clockSound.setLooping(true);
+		clockSound.start();
+		
 		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
@@ -83,7 +91,7 @@ public class LinkPhaseActivity extends Activity {
 		     }
 
 		     public void onFinish() {
-		    	 Intent intent = new Intent(LinkPhaseActivity.this, QuizPhaseActivity.class);
+		    	 Intent intent = new Intent(LinkPhaseActivity.this, CountDown.class);
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
 		     }
@@ -180,7 +188,7 @@ public class LinkPhaseActivity extends Activity {
 		
 		prevWordLabel.setEnabled(true);
 		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
-			Intent intent = new Intent(this,QuizPhaseActivity.class);
+			Intent intent = new Intent(this,CountDown.class);
 			intent.putExtra("gameModel",gm);
 			startActivity(intent);
 			finish();
@@ -189,6 +197,7 @@ public class LinkPhaseActivity extends Activity {
 				nextWordLabel.setText("Start Quiz!");
 			}
 			gm.nextWord();
+			buttonSound.start();
 			updateLabels();
 		}
 	}
@@ -200,6 +209,7 @@ public class LinkPhaseActivity extends Activity {
 			nextWordLabel.setText("Next Word");
 		}
 		gm.prevWord();
+		buttonSound.start();
 		updateLabels();
 	}
 	
@@ -215,5 +225,13 @@ public class LinkPhaseActivity extends Activity {
 		firstWordLabel.setText(gm.getWordOne());
 		secondWordLabel.setText(gm.getWordTwo());
 	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		clockSound.release();
+	}
+	
 	
 }

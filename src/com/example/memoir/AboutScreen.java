@@ -16,8 +16,7 @@ public class AboutScreen extends Activity{
         setContentView(R.layout.about_screen);
         
         ActionBar actionBar = getActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3498DB")));
-        actionBar.setTitle(Html.fromHtml("<large>ABOUT</large>"));
+        actionBar.hide();
         
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Mojave/Mojave-Regular.ttf");
         TextView myTextView = (TextView)findViewById(R.id.anamnesiaTxt);
