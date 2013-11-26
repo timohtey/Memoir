@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 public class LinkPhaseUtility_Start	extends Activity {
 		
-		MediaPlayer buttonSound;
+		MediaPlayer buttonSound, deleteSound;
 		
 		ArrayAdapter<String> mAdapter;
 	    private ArrayList<String> arrayList = new ArrayList<String>();
@@ -34,6 +34,7 @@ public class LinkPhaseUtility_Start	extends Activity {
 	        setContentView(R.layout.linkphase_utility_start);
 	        
 	        buttonSound = MediaPlayer.create(LinkPhaseUtility_Start.this, R.raw.button);
+	        deleteSound = MediaPlayer.create(LinkPhaseUtility_Start.this, R.raw.delete);
 	        
 	        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Canter/Canter Bold.otf");
 	        lv = (ListView) findViewById(R.id.list);
@@ -79,6 +80,7 @@ public class LinkPhaseUtility_Start	extends Activity {
 	                            @Override
 	                            public void onDismiss(ListView lv, int[] reverseSortedPositions) {
 	                                for (int position : reverseSortedPositions) {
+	                                	deleteSound.start();
 	                                    mAdapter.remove(mAdapter.getItem(position));
 	                                }
 	                                mAdapter.notifyDataSetChanged();
