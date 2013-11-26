@@ -43,6 +43,7 @@
         <activity android:name="LoadingScreen"></activity>
         <activity android:name="ShapesScreen"></activity>
         <activity android:name="TutorialShapes"></activity>
+        <activity android:name="ResultScreen"></activity>
         
     </application>
 

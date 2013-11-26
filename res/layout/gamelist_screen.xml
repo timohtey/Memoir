@@ -58,22 +58,23 @@
         android:layout_marginTop="45dp"
         android:src="@drawable/second_game" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/tutorialButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:layout_alignBottom="@+id/images"
-        android:layout_alignLeft="@+id/tutorialButton"
-        android:layout_marginBottom="11dp"
+        android:layout_toLeftOf="@+id/customGameButton"
         android:src="@drawable/tutorial_button" />
 
     <ImageButton
         android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tutorialButton2"
-        android:layout_alignRight="@+id/images"
-        android:layout_marginBottom="22dp"
+        android:layout_alignBottom="@+id/images"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:background="@null"
         android:src="@drawable/start" />
 
 </RelativeLayout>

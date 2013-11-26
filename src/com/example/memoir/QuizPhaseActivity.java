@@ -91,7 +91,7 @@ public class QuizPhaseActivity extends Activity {
 
 		     public void onFinish() {
 		    	 //TODO: Goto resultscreen
-		    	 Intent intent = new Intent(QuizPhaseActivity.this, AboutScreen.class);
+		    	 Intent intent = new Intent(QuizPhaseActivity.this, ResultScreen.class);
 		    	 gm.endQuizPhase(false);
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
@@ -114,6 +114,9 @@ public class QuizPhaseActivity extends Activity {
 		        			secondWordLabel.setText("");
 		        	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
 		        	        	gm.endQuizPhase(true);
+		        	        	Intent intent = new Intent(QuizPhaseActivity.this, ResultScreen.class);
+		       		    	 	intent.putExtra("gameModel",gm);
+		       		    	 	startActivity(intent);
 		        	        	finish();
 		        	        	//TODO: goto result screen
 		        	        }

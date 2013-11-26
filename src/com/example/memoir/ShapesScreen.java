@@ -49,7 +49,7 @@ public class ShapesScreen extends Activity{
 		randomShapeIndex = randomShapesImg.nextInt(shapes.size()-1);
 		randomShapeTxt = randomShapesTxt.nextInt(shapes.size()-1);
 		CountDownTimer timer = new CountDownTimer(30000, 1000) {
-			int i = 60;
+			int i = 30;
 		    public void onTick(long millisUntilFinished) {
 		    	i--;
 		    	 if(i<10){
