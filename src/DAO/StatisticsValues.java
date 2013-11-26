@@ -5,8 +5,16 @@ public class StatisticsValues {
 	private int id;
 	private String gameName;
 	private int accuracy;
-	private int wordAverage;
+	private float wordAverage;
 	private int level;
+	
+	public StatisticsValues(int id, String gameName, int accuracy, float wordAverage, int level){
+		this.id = id;
+		this.gameName = gameName;
+		this.accuracy = accuracy;
+		this.wordAverage = wordAverage;
+		this.level = level;
+	} 
 	
 	public int getId() {
 		return id;
