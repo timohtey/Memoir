@@ -30,6 +30,7 @@
         <activity android:name="LinkPhaseUtility"></activity>
         <activity android:name="LinkPhaseUtility_Start"></activity>
         <activity android:name="CountDown"></activity>
+        <activity android:name="LoadingScreen"></activity>
         
     </application>
 
