@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -18,7 +19,7 @@ public class MainActivity extends Activity {
 	
 	private ImageButton beginButton;
 	private ImageButton statisticsButton;
-	private ImageButton aboutButton;
+	private ImageView aboutButton;
 	private TextView nameText;
 	private TextView memoir;
     @Override
@@ -37,7 +38,7 @@ public class MainActivity extends Activity {
         statisticsButton = (ImageButton) findViewById(R.id.statisticsButton);
         nameText = (TextView) findViewById(R.id.nameText);
         memoir = (TextView) findViewById(R.id.memoirTextView);
-        aboutButton = (ImageButton) findViewById(R.id.ScrollView);
+        aboutButton = (ImageView) findViewById(R.id.aboutButton);
         memoir.setTypeface(myTypeface);
         memoir.setTextSize(100);
         
