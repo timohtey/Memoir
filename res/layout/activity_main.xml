@@ -64,7 +64,7 @@
             android1:layout_width="wrap_content"
             android1:layout_height="wrap_content"
             android1:layout_gravity="center_vertical|center_horizontal"
-            android1:layout_marginTop="30sp"
+            android1:layout_marginTop="50sp"
             android1:text="Hello, Timothy."
             android1:textColor="#ffff"
             android1:textSize="20sp" />

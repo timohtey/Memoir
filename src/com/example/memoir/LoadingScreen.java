@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import DAO.MemoirDAO;
-import android.R.color;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;

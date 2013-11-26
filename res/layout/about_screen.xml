@@ -2,7 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/woodpine"
     android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1abc9c"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:text="ABOUT"
+            android:textColor="#ffff"
+            android:textSize="30sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/anamnesiaTxt"
@@ -24,43 +44,6 @@
         android:background="#BDC3C7" >
 
         <ImageView
-            android:id="@+id/goBtn"
-            android:layout_width="102dp"
-            android:layout_height="69dp"
-            android:layout_marginTop="3dp"
-            android:src="@drawable/about_lou" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/louTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Louis Dumlao"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/louPrjMngTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Project Manager"
-                android:textSize="15sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="0.00"
-        android:background="#BDC3C7" >
-
-        <ImageView
             android:id="@+id/ImageView01"
             android:layout_width="102dp"
             android:layout_height="69dp"
@@ -74,17 +57,17 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/lorddTxt"
+                android:id="@+id/louTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lordd Lazaro"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/TextView02"
+                android:id="@+id/louPrjMngTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Developer"
+                android:text="All Roles"
                 android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
@@ -121,9 +104,10 @@
                 android:id="@+id/TextView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Developer"
+                android:text="Developer/Sound Engineer"
                 android:textSize="15sp" />
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -158,9 +142,48 @@
                 android:id="@+id/TextView04"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Developer/Designer"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="0.00"
+        android:background="#BDC3C7" >
+
+        <ImageView
+            android:id="@+id/goBtn"
+            android:layout_width="102dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/about_lou" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lorddTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Louis Dumlao"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Designer"
                 android:textSize="15sp" />
         </LinearLayout>
+
     </LinearLayout>
 
     <TextView
