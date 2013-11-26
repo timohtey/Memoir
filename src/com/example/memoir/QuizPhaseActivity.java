@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Html;
@@ -22,6 +23,10 @@ import android.widget.TextView;
 
 public class QuizPhaseActivity extends Activity {
 
+	MediaPlayer correctSound;
+	MediaPlayer wrongSound;
+	MediaPlayer clockSound;
+	
 	GameModel gm;
 	
 	TextView progressLabel;
@@ -43,6 +48,12 @@ public class QuizPhaseActivity extends Activity {
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
 		
+	    correctSound = MediaPlayer.create(QuizPhaseActivity.this, R.raw.correct);
+	    wrongSound = MediaPlayer.create(QuizPhaseActivity.this, R.raw.wrong);
+	    clockSound = MediaPlayer.create(QuizPhaseActivity.this, R.raw.clock);
+	    clockSound.setLooping(true);
+	    clockSound.start();
+	    
         Intent i = getIntent();
         gm =  (GameModel)i.getSerializableExtra("gameModel");
         
@@ -97,6 +108,8 @@ public class QuizPhaseActivity extends Activity {
 
 		            	String answer = secondWordLabel.getText().toString();
 		        		if(gm.answerQuiz(answer)){
+		        			
+		        			correctSound.start();
 		        			updateLabels();
 		        			secondWordLabel.setText("");
 		        	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
@@ -104,6 +117,9 @@ public class QuizPhaseActivity extends Activity {
 		        	        	finish();
 		        	        	//TODO: goto result screen
 		        	        }
+		        		}
+		        		else{
+		        			wrongSound.start();
 		        		}
 
 		                return true;
@@ -124,6 +140,13 @@ public class QuizPhaseActivity extends Activity {
 		progressLabel.setText(progress+"/"+gm.getWordCount() + " words");
 		firstWordLabel.setText(gm.getWordOne());
 		
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		clockSound.release();
 	}
 	
 	

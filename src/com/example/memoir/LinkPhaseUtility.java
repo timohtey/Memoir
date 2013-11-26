@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -17,11 +18,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class LinkPhaseUtility extends Activity {
+	
+	MediaPlayer buttonSound;
 	EditText customWordsTxt;
 	ImageView imgBtn;
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.linkphase_utility);
+        
+        buttonSound = MediaPlayer.create(LinkPhaseUtility.this, R.raw.button);
         
         ActionBar actionBar = getActionBar();
 	    actionBar.hide();
@@ -52,6 +57,7 @@ public class LinkPhaseUtility extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				
+				buttonSound.start();
                 ArrayList<String> customWordsArray = new ArrayList<String>();
             	StringBuilder temp = new StringBuilder(customWordsTxt.getText().toString());
             	String customWords = "";    

@@ -130,6 +130,7 @@ public class LinkPhaseUtility_Start	extends Activity {
 	        newBtn.setOnClickListener(new OnClickListener(){    
 	            @Override
 				public void onClick(View v) {
+	            	buttonSound.start();
 	            	Intent myIntent = new Intent(LinkPhaseUtility_Start.this, LinkPhaseUtility.class);
 	                startActivity(myIntent);
 				}
