@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -33,6 +34,7 @@ public class LinkPhaseActivity extends Activity {
 	ProgressBar timeBar;
 	CountDownTimer timer;
 	long timeRemaining=0;
+	long timeRemainingStatic=0;
 	MemoirDAO DAO = new MemoirDAO(LinkPhaseActivity.this);
 	
 	@Override
@@ -107,22 +109,79 @@ public class LinkPhaseActivity extends Activity {
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if ((keyCode == KeyEvent.KEYCODE_BACK)) { //Back key pressed
+	    
+		
+		
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) { //Back key pressed
 	       //Things to Do
-	    	Intent intent = new Intent(LinkPhaseActivity.this, PauseScreen.class);
-	    	intent.putExtra("timeRemaining", timeRemaining);
-	    	startActivity(intent);
+	    	Intent i = new Intent(LinkPhaseActivity.this, PauseScreen.class);
+	    	i.putExtra("timeRemaining", timeRemaining);
+	    	i.putExtra("gameModel", gm);
+	    	timer.cancel();
+	    	startActivityForResult(i,0);
 	        return true;
 	    }else if((keyCode == KeyEvent.KEYCODE_MENU)){
-	    	Intent intent = new Intent(LinkPhaseActivity.this, PauseScreen.class);
-	    	intent.putExtra("timeRemaining", timeRemaining);
-	    	startActivity(intent);
+	    	Intent i = new Intent(LinkPhaseActivity.this, PauseScreen.class);
+	    	i.putExtra("timeRemaining", timeRemaining);
+	    	i.putExtra("gameModel", gm);
+	    	timer.cancel();
+	    	startActivityForResult(i,0);
 	    	return true;
 	    }
 	    return super.onKeyDown(keyCode, event);
 	}
 	
-	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		Log.d("pauseTest", "rCode :"+ requestCode+ "time rem: " + data.getLongExtra("timeRemaining", 0));
+		
+		if(requestCode ==0){
+			if(resultCode == RESULT_OK){
+				
+				timeRemainingStatic = data.getLongExtra("timeRemaining", 300000);
+				timeBar.setMax((int)timeRemaining);
+				Log.d("pauseTest","timeRemaining global: "+ timeRemaining);
+				timer = new CountDownTimer(timeRemainingStatic, 1000) {
+					int i = (int)((timeRemainingStatic/1000)%60);
+				     public void onTick(long millisUntilFinished) {
+				    	 timeBar.setProgress((int)(timeRemainingStatic-millisUntilFinished));
+				    	 Log.d("pauseTest","i: "+i+" progress:"+(timeRemainingStatic-millisUntilFinished) +"millis:"+millisUntilFinished);
+				    	 timeRemaining =  millisUntilFinished;
+				    	 i--;
+				    	 if(i<10){
+					    	 timeLabel.setText((millisUntilFinished/1000)/60 + ":0"+ i);
+				    	 }
+				    	 else timeLabel.setText((millisUntilFinished/1000)/60 + ":"+ i);
+				    	 if(i == 0){
+				    		 i = 60;
+				    		 Log.d("pauseTest","RESET seconds to 60");
+				    	 }
+				    	 if (i ==1 && (millisUntilFinished/1000)/60 == 0 ){
+				    		 i = 0;
+				    	 }
+				     }
+
+				     public void onFinish() {
+				    	 Intent intent = new Intent(LinkPhaseActivity.this, QuizPhaseActivity.class);
+				    	 intent.putExtra("gameModel",gm);
+				    	 startActivity(intent);
+				     }
+				  }.start();
+			}else if( resultCode == 2){
+				//restart
+				Intent intent = new Intent(LinkPhaseActivity.this, LinkPhaseActivity.class);
+		    	 startActivity(intent);
+		    	 finish();
+			}else if(resultCode == 3){
+				//settings
+				
+			}else if( resultCode == 4){
+				//EXIT
+				finish();
+			}
+		}
+	}
 	
 	
 	public void nextWord(View v){
