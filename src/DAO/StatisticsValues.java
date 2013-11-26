@@ -8,6 +8,10 @@ public class StatisticsValues {
 	private float wordAverage;
 	private int level;
 	
+	public StatisticsValues(){
+		
+	}
+	
 	public StatisticsValues(int id, String gameName, int accuracy, float wordAverage, int level){
 		this.id = id;
 		this.gameName = gameName;
