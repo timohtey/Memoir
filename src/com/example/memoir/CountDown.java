@@ -6,16 +6,22 @@ import java.util.TimerTask;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.ImageView;
 
 public class CountDown extends Activity{
+	
+	MediaPlayer countdownSound;
 	private ImageView imageView;
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.countdown_screen);
+        
+        countdownSound = MediaPlayer.create(CountDown.this, R.raw.countdown);
+        
         ActionBar actionBar = getActionBar();
         actionBar.hide();
         final Intent i = getIntent();
@@ -41,5 +47,6 @@ public class CountDown extends Activity{
 		    	 startActivity(intent);
 		     }
 		  }.start();
+		  countdownSound.start();
 	}
 }
