@@ -28,6 +28,7 @@ public class LinkPhaseUtility_Start	extends Activity {
 		private Button newBtn;
 		private ListView lv;
 		private TextView title;
+		private static int position;
 		
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -58,8 +59,14 @@ public class LinkPhaseUtility_Start	extends Activity {
 
 	        Bundle extras = getIntent().getExtras();
 		    if(extras != null){
-		    	String newWord = extras.getString(("customWords"));
-            	arrayList.add(newWord);
+		    	if(extras.getString("edited").equals("true")){
+		    		String newWord = extras.getString(("customWords"));
+		    		arrayList.set(position, newWord);
+		    	}
+		    	else{
+		    		String newWord = extras.getString(("customWords"));
+		    		arrayList.add(newWord);
+		    	}
 		    }
 		    
 	        mAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, arrayList);
@@ -101,7 +108,8 @@ public class LinkPhaseUtility_Start	extends Activity {
 	            	String positionStr = adapter.getItemAtPosition(position).toString();
 	            	ArrayList<String> customWordsArray = new ArrayList<String>();
 	            	StringBuilder temp = new StringBuilder(positionStr);
-	            	String customWords = "";         	
+	            	String customWords = "";    
+	            	LinkPhaseUtility_Start.this.position = position;
 	            	for(int i = 0; i < temp.length(); i++){
 	            		if(temp.charAt(i) == ' ' || temp.charAt(i) == ','){
 	            			if(customWords.equals("") == false){
@@ -113,7 +121,7 @@ public class LinkPhaseUtility_Start	extends Activity {
 	            		}
        				 }
 	            	customWordsArray.add(customWords);
-	                Intent myIntent = new Intent(LinkPhaseUtility_Start.this, LinkPhaseActivity.class);
+	                Intent myIntent = new Intent(LinkPhaseUtility_Start.this, LinkPhaseUtility.class);
 	                myIntent.putStringArrayListExtra("customWords", customWordsArray);
 		            startActivity(myIntent);
 	            }
