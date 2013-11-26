@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class LinkPhaseUtility_Start	extends Activity {
+		
+		MediaPlayer buttonSound;
+		
 		ArrayAdapter<String> mAdapter;
 	    private ArrayList<String> arrayList = new ArrayList<String>();
 		private Button newBtn;
@@ -28,6 +32,8 @@ public class LinkPhaseUtility_Start	extends Activity {
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.linkphase_utility_start);
+	        
+	        buttonSound = MediaPlayer.create(LinkPhaseUtility_Start.this, R.raw.button);
 	        
 	        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Canter/Canter Bold.otf");
 	        lv = (ListView) findViewById(R.id.list);
@@ -87,6 +93,9 @@ public class LinkPhaseUtility_Start	extends Activity {
 	        {
 	            @Override
 	            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3){
+	            	
+	            	buttonSound.start();
+	            	
 	            	String positionStr = adapter.getItemAtPosition(position).toString();
 	            	ArrayList<String> customWordsArray = new ArrayList<String>();
 	            	StringBuilder temp = new StringBuilder(positionStr);
