@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/woodpine"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/shapesTutorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100sp"
+        android:src="@drawable/flower" />
+
+    <TextView
+        android:id="@+id/shapesTxtTutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="20sp"
+        android:text="Flower"
+        android:textColor="#ffff"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30sp" >
+
+        <Button
+            android:id="@+id/prevBtnS"
+            android:layout_width="184dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/container_dropshadow"
+            android:text="Previous Image"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/nextBtnS"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/container_dropshadow2"
+            android:text="Next Image"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

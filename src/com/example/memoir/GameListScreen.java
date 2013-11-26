@@ -23,6 +23,8 @@ public class GameListScreen extends Activity {
 	private ImageButton beginLinkingButton;
 	private ImageButton customGameButton;
 	private ImageButton tutorialButton;
+	private ImageButton tutorialButton2;
+	private ImageButton startButton;
 	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,8 @@ public class GameListScreen extends Activity {
         beginLinkingButton = (ImageButton) findViewById(R.id.beginLinkingButton);
         customGameButton = (ImageButton) findViewById(R.id.customGameButton);
         tutorialButton = (ImageButton) findViewById(R.id.tutorialButton);
+        tutorialButton2= (ImageButton) findViewById(R.id.tutorialButton2);
+        startButton = (ImageButton) findViewById(R.id.startBtn);
         
         addListeners();
     }
@@ -65,6 +69,23 @@ public class GameListScreen extends Activity {
 	            	buttonSound.start();
 //	            	Intent myIntent = new Intent(GameListScreen.this, StatisticsScreen.class);
 //	                startActivity(myIntent);
+				}
+	        });
+	        tutorialButton2.setOnClickListener(new OnClickListener(){    
+	            @Override
+				public void onClick(View v) {
+	            	buttonSound.start();
+	            	Intent myIntent = new Intent(GameListScreen.this, TutorialShapes.class);
+	                startActivity(myIntent);
+				}
+	        });
+	        
+	        startButton.setOnClickListener(new OnClickListener(){    
+	            @Override
+				public void onClick(View v) {
+	            	buttonSound.start();
+	            	Intent myIntent = new Intent(GameListScreen.this, ShapesScreen.class);
+	                startActivity(myIntent);
 				}
 	        });
 	}
