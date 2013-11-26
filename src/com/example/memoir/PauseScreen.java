@@ -32,8 +32,6 @@ public class PauseScreen extends Activity{
         actionBar.hide();
         
         Intent i = getIntent();
-        gm =  (GameModel)i.getSerializableExtra("gameModel");
-        if(gm==null)
         	
         timeRemaining = i.getLongExtra("timeRemaining", 300000);
         Log.d("pauseTest", "time rem:"+timeRemaining);

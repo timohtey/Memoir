@@ -116,13 +116,14 @@ public class QuizPhaseActivity extends Activity {
 		        			secondWordLabel.setText("");
 		        	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
 
-		        	        	Intent intent = new Intent(QuizPhaseActivity.this, AboutScreen.class);
+		        	        	Intent intent = new Intent(QuizPhaseActivity.this, ResultScreen.class);
 			       		    	 gm.endQuizPhase(true,timeRemaining);
+			       		    	 /*
 			       		    	 {	//RECORD GAME
 			       		    		 int id = DAO.getLastStatisticIndex()+1;
 			       		    		 StatisticsValues result = new StatisticsValues(id,"link",gm.computeAccuracy(),gm.computeWordPerMin(),gm.getLinkLevel());;
 			       		    		 DAO.updateStatistics(result);
-			       		    	 }
+			       		    	 }*/
 			       		    	 intent.putExtra("gameModel",gm);
 			       		    	 startActivity(intent);
 			       		    	 finish();
@@ -132,7 +133,7 @@ public class QuizPhaseActivity extends Activity {
 		        		else{
 		        			wrongSound.start();
 		        		}
-
+		        		updateLabels();
 		                return true;
 		            }
 		            return false;
@@ -144,13 +145,14 @@ public class QuizPhaseActivity extends Activity {
 	}
 	
 	public void finishByTime(){
-		Intent intent = new Intent(QuizPhaseActivity.this, AboutScreen.class);
+		Intent intent = new Intent(QuizPhaseActivity.this, ResultScreen.class);
 	   	 gm.endQuizPhase(false,(long)gm.getTimeLimit());
+	   	 /*
 	   	 {	//RECORD GAME
 	   		 int id = DAO.getLastStatisticIndex()+1;
 	   		 StatisticsValues result = new StatisticsValues(id,"link",gm.computeAccuracy(),gm.computeWordPerMin(),gm.getLinkLevel());;
 	   		 DAO.updateStatistics(result);
-	   	 }
+	   	 }*/
 	   	 intent.putExtra("gameModel",gm);
 	   	 startActivity(intent);
 	   	 finish();

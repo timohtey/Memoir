@@ -38,20 +38,23 @@ public class ResultScreen extends Activity {
         goodJob= (TextView)findViewById(R.id.goodJob);
         goodJob.setTypeface(myTypeface);
         int accuracyComputed = gm.computeAccuracy();
-        //int wordsGuessed = gm.
+        float wordsGuessed = gm.computeWordPerMin();
         accuracy.setText(""+accuracyComputed +"%");
+        wordsPM.setText(""+wordsGuessed);
         
         playAgain.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-            	
+            	Intent i = new Intent(ResultScreen.this, LinkPhaseActivity.class);
+            	startActivity(i);
+            	finish();
             }
         });
         
         exitToMainMenu.setOnClickListener(new OnClickListener(){    
             @Override
 			public void onClick(View v) {
-            	
+            	finish();
             }
         });
 	}

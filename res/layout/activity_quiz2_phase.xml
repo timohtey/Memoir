@@ -128,7 +128,7 @@
             android:fontFamily="sans-serif-light"
             android:gravity="center_vertical|center_horizontal"
             android:imeOptions="actionDone"
-            android:inputType="textFilter|textNoSuggestions"
+            android:inputType="textNoSuggestions|textFilter"
             android:maxLines="1"
             android:textColor="#ffff"
             android:textSize="40sp" />
