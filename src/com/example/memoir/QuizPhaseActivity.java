@@ -84,6 +84,7 @@ public class QuizPhaseActivity extends Activity {
 		    	 gm.endQuizPhase(false);
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
+		    	 finish();
 		     }
 		     
 		     
@@ -114,6 +115,12 @@ public class QuizPhaseActivity extends Activity {
 		 
         updateLabels();
         
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 	}
 	
 	public void updateLabels(){
