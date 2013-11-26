@@ -81,7 +81,7 @@ public class LinkPhaseActivity extends Activity {
 		     }
 
 		     public void onFinish() {
-		    	 Intent intent = new Intent(LinkPhaseActivity.this, QuizPhaseActivity.class);
+		    	 Intent intent = new Intent(LinkPhaseActivity.this, CountDown.class);
 		    	 intent.putExtra("gameModel",gm);
 		    	 startActivity(intent);
 		     }
@@ -121,7 +121,7 @@ public class LinkPhaseActivity extends Activity {
 		
 		prevWordLabel.setEnabled(true);
 		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
-			Intent intent = new Intent(this,QuizPhaseActivity.class);
+			Intent intent = new Intent(this,CountDown.class);
 			intent.putExtra("gameModel",gm);
 			startActivity(intent);
 			finish();
