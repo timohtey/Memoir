@@ -148,6 +148,9 @@ public class MemoirDAO{
 		return this;
 	}
 	
+	public ArrayList<String> getTipList(){
+		return tipList;
+	}
 	public void close(){
 		dbHelper.close();
 	}
