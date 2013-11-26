@@ -62,18 +62,18 @@
         android:id="@+id/tutorialButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:layout_alignBottom="@+id/images"
-        android:layout_toLeftOf="@+id/customGameButton"
+        android:layout_alignLeft="@+id/tutorialButton"
+        android:layout_marginBottom="14dp"
+        android:background="@null"
         android:src="@drawable/tutorial_button" />
 
     <ImageButton
         android:id="@+id/startBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/images"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/tutorialButton2"
+        android:layout_toRightOf="@+id/tutorialButton2"
         android:background="@null"
         android:src="@drawable/start" />
 

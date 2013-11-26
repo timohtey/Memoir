@@ -2,16 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9b59b6"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/goodJob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginTop="40sp"
         android:text="Good Job!"
-        android:textSize="40sp" />
+        android:textColor="#ffff"
+        android:textSize="100sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +25,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40sp"
             android:layout_marginTop="30sp"
+            android:fontFamily="sans-serif-light"
             android:text="Accuracy:"
-            android:textSize="18sp" />
+            android:textColor="#ffff"
+            android:textSize="30sp"
+            android:typeface="sans" />
 
         <TextView
             android:id="@+id/accuracyTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
+            android:fontFamily="sans-serif-light"
             android:layout_marginTop="30sp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#ffff"
+            android:textSize="30sp"
+            android:typeface="sans" />
 
     </LinearLayout>
 
@@ -46,8 +55,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40sp"
             android:layout_marginTop="20sp"
-            android:text="Word guessed per minute:"
-            android:textSize="15sp" />
+            android:fontFamily="sans-serif-light"
+            android:text="Words guessed per minute:"
+            android:textColor="#ffff"
+            android:textSize="20sp"
+            android:typeface="sans" />
 
         <TextView
             android:id="@+id/wordsGuessedpm"
@@ -55,7 +67,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
             android:layout_marginTop="20sp"
-            android:text="TextView" />
+            android:fontFamily="sans-serif-light"
+            android:text="0"
+            android:textColor="#ffff"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -64,7 +79,7 @@
         android:layout_width="170dp"
         android:layout_height="60dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="70sp"
+        android:layout_marginTop="100sp"
         android:background="@drawable/container_dropshadow"
         android:text="Play Again"
         android:textColor="#ffffff"
