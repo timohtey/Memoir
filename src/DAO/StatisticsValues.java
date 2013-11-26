@@ -8,6 +8,11 @@ public class StatisticsValues {
 	private float wordAverage;
 	private int level;
 	
+	public StatisticsValues(){
+		//filler code VVVV
+		getId();
+	}
+	
 	public StatisticsValues(int id, String gameName, int accuracy, float wordAverage, int level){
 		this.id = id;
 		this.gameName = gameName;
@@ -34,7 +39,7 @@ public class StatisticsValues {
 	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
-	public int getWordAverage() {
+	public float getWordAverage() {
 		return wordAverage;
 	}
 	public void setWordAverage(int wordAverage) {
