@@ -44,6 +44,7 @@
         <activity android:name="ShapesScreen"></activity>
         <activity android:name="TutorialShapes"></activity>
         <activity android:name="ResultScreen"></activity>
+        <activity android:name="route.AddRouteScreen"></activity>
         
     </application>
 
