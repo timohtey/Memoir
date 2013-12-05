@@ -198,6 +198,7 @@ public class LinkPhaseActivity extends Activity {
 			Intent intent = new Intent(this,CountDown.class);
 			intent.putExtra("gameModel",gm);
 			startActivity(intent);
+			timer.cancel();
 			finish();
 		}else{
 			if(gm.getCurrentWordIndex()+3==gm.getWordCount()){
