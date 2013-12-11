@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+	<item android:id="@+id/addRouteBtn_"
+          android:icon="@drawable/add_route"
+          android:title="Add Route"
+          android:showAsAction="always"/>
+	
+	<item android:id="@+id/deleteRouteBtn_"
+          android:icon="@drawable/delete_route"
+          android:title="Delete Route"
+          android:showAsAction="never"/>
+</menu>

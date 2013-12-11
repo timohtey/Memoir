@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.R;
@@ -7,7 +8,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-public class Route extends Activity{
+public class Route extends Activity implements Serializable{
 	private ArrayList<ImageView> routeImages;
 	private String routeDescription;
 	private String routeTitle;

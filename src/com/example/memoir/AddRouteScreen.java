@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Model.GameModel;
+import Model.Route;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +16,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.GridLayout.LayoutParams;
 import android.widget.ImageView;
@@ -27,15 +30,39 @@ public class AddRouteScreen extends Activity {
     private static final int SELECT_PICTURE = 1;
     
     private String selectedImagePath;
+    EditText routeName;
+    EditText routeDesc;
     Button addLandmarkBtn;
     GridLayout gridLayout;
+    ArrayList<Route> routes;
+    Button saveRoute;
+    String mode = "";
+    int position;
     ArrayList<ImageView> addImageView = new ArrayList<ImageView>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_route);
 
         addLandmarkBtn = (Button) findViewById(R.id.addLandmarkBtn);
+        saveRoute = (Button) findViewById(R.id.saveRouteBtn);
         gridLayout = (GridLayout) findViewById(R.id.gridLayoutImage);
+        routeName = (EditText) findViewById(R.id.routeNameTxt);
+        routeDesc = (EditText) findViewById(R.id.routeDescTxt);
+        
+        Intent i = getIntent();
+        if(i.getExtras().containsKey("position") == true){
+	        routes =  (ArrayList<Route>) i.getSerializableExtra("routes");
+	        position = i.getIntExtra("position", 0);
+	        
+	        routeName.setText(routes.get(position).getRouteTitle());
+	        routeDesc.setText(routes.get(position).getRouteDescription());
+	        mode = "EDIT_MODE";
+        }
+        else {
+        	mode = "ADD_MODE";
+        	routes =  (ArrayList<Route>) i.getSerializableExtra("routes");
+        	saveRoute.setText("Add Route");
+        }
         addLandmarkBtn.setOnClickListener(new OnClickListener() {
         	public void onClick(View arg0) {			
 				// in onCreate or any event where your want the user to
@@ -47,6 +74,26 @@ public class AddRouteScreen extends Activity {
 				        "Select Picture"), SELECT_PICTURE);
         	}
          });
+        
+        saveRoute.setOnClickListener(new OnClickListener() {
+        	public void onClick(View arg0) {
+				Intent intent = new Intent(AddRouteScreen.this, RouteMain.class);
+				if(mode == "ADD_MODE"){
+					routes.add(new Route());
+					routes.get(routes.size()-1).setRouteTitle(routeName.getText().toString());
+					routes.get(routes.size()-1).setRouteDescription(routeDesc.getText().toString());
+					intent.putExtra("routes", routes);
+				}
+				else if(mode == "EDIT_MODE"){
+					routes.get(position).setRouteTitle(routeName.getText().toString());
+					routes.get(position).setRouteDescription(routeDesc.getText().toString());
+					intent.putExtra("routes", routes);
+				} 
+				startActivity(intent);
+        	}
+         });
+        
+        
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

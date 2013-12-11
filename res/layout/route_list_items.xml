@@ -39,6 +39,7 @@
                     android:id="@+id/landMarksTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
                     android:gravity="right"
                     android:text="20 Landmarks" />
 
@@ -60,6 +61,7 @@
                 android:id="@+id/masteryTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:gravity="right"
                 android:text="80% Mastery" />
 
