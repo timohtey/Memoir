@@ -1,6 +1,5 @@
 package com.example.memoir;
 
-import route.AddRouteScreen;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -85,7 +84,7 @@ public class GameListScreen extends Activity {
 	            @Override
 				public void onClick(View v) {
 	            	buttonSound.start();
-	            	Intent myIntent = new Intent(GameListScreen.this, AddRouteScreen.class);
+	            	Intent myIntent = new Intent(GameListScreen.this, RouteMain.class);
 	                startActivity(myIntent);
 				}
 	        });
