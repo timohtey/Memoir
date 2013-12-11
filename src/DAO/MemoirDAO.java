@@ -319,6 +319,70 @@ public class MemoirDAO{
 		return uniqueWords;
 	}
 	
+	//For editing the words of a set
+		public void editWordList(String title, ArrayList<String> wordList){
+			
+			ArrayList<Integer> wordIndexes = new ArrayList<Integer>();
+			ArrayList<Integer> indexesToDelete = new ArrayList<Integer>();
+			ArrayList<String> wordsToInsert = new ArrayList<String>();
+			int setIndex = 0;
+			setIndex = getSetIndex(title);
+			wordIndexes = getSetWordIndexes(setIndex);
+			
+			if(wordIndexes.size() == wordList.size()){
+				executeUpdateQuery(wordIndexes.size(), wordIndexes, wordList, setIndex);
+			}
+			else if(wordList.size() < wordIndexes.size()){
+				executeUpdateQuery(wordList.size(), wordIndexes, wordList, setIndex);
+				for(int i = wordList.size(); i < wordIndexes.size(); i++){
+					indexesToDelete.add(wordIndexes.get(i));
+				}
+				executeDeleteQuery(indexesToDelete);
+				
+			}
+			else if(wordList.size() > wordIndexes.size()){
+				executeUpdateQuery(wordIndexes.size(), wordIndexes, wordList, setIndex);
+				for(int i = wordIndexes.size(); i < wordList.size(); i++){
+					wordsToInsert.add(wordList.get(i));
+				}
+				executeInsertQuery(setIndex, wordsToInsert);
+			}
+		}
+		
+		private void executeUpdateQuery(int size, ArrayList<Integer> wordIndexes, ArrayList<String> wordList, int setIndex){
+			
+			for(int i = 0; i < size; i++){
+				ourDatabase.execSQL("UPDATE " + LINK_WORD_TABLE
+					+ " SET " + KEY_WORD + " = '" + wordList.get(i) + "' WHERE " + KEY_WORD_ID + " = " + wordIndexes.get(i) + ";");
+			}
+		}
+		
+		private void executeDeleteQuery(ArrayList<Integer> indexesToDelete){
+			for(int i = 0; i < indexesToDelete.size(); i++){
+				ourDatabase.execSQL("DELETE FROM " + LINK_WORD_TABLE + " WHERE " + KEY_WORD_ID + " = " + indexesToDelete.get(i));
+				ourDatabase.execSQL("DELETE FROM " + LINK_WORD_SET_TABLE + " WHERE " + KEY_WORD_ID + " = " + indexesToDelete.get(i));
+			}
+		}
+		
+		private void executeInsertQuery(int setIndex, ArrayList<String> wordsToInsert){
+			
+			int wordLastIndex = 0;
+			
+			for(int i = 0 ; i < wordsToInsert.size(); i++){
+				ourDatabase.execSQL("INSERT INTO " + LINK_WORD_TABLE +
+							"(" + KEY_WORD + ") VALUES ('" + wordsToInsert.get(i) + "');");
+			}
+			
+			wordLastIndex = getLastIndex(KEY_WORD_ID, LINK_WORD_TABLE);
+			wordLastIndex -= wordsToInsert.size() - 1;
+			
+			for(int j = 0 ; j < wordsToInsert.size(); j++){
+				ourDatabase.execSQL("INSERT INTO " + LINK_WORD_SET_TABLE +
+							"(" + KEY_SET_ID +", " + KEY_WORD_ID + ") VALUES (" + setIndex + ", " + wordLastIndex +");");
+				wordLastIndex++;
+			}
+		}
+	
 	//For deleting a set in Link Custom
 		public void deleteCustomWordList (String title){
 			ArrayList<Integer> wordListIndexes = new ArrayList<Integer>();
