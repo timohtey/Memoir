@@ -2,7 +2,6 @@ package DAO;
 import java.util.ArrayList;
 import java.util.Random;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -24,6 +23,7 @@ public class MemoirDAO{
 	private static final String LINK_SET_TABLE = "Sets";
 	private static final String LINK_WORD_TABLE = "CustomWords";
 	private static final String LINK_WORD_SET_TABLE = "WordSet";	
+	private static final String LINK_STATISTICS_TABLE = "Statistics";
 	
 	//Id column name
 	private static final String KEY_ID = "_id";
@@ -76,6 +76,11 @@ public class MemoirDAO{
 			+ KEY_WORD_ID + " INTEGER NOT NULL, FOREIGN KEY("+ KEY_SET_ID + ") REFERENCES "
 			+ LINK_SET_TABLE + "(" + KEY_SET_ID + "), FOREIGN KEY(" + KEY_WORD_ID + ")  REFERENCES "
 			+ LINK_WORD_TABLE + "(" + KEY_WORD_ID + "));";
+	
+	private static final String CREATE_LINK_STATISTICS_TABLE = "CREATE TABLE " +  LINK_STATISTICS_TABLE + " ( "
+			+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ KEY_ACCURACY + " INTEGER NOT NULL, "
+			+ KEY_WORD_AVERAGE + " INTEGER NOT NULL);";
 
 
 	private static class DbHelper extends SQLiteOpenHelper{
@@ -113,6 +118,8 @@ public class MemoirDAO{
 			db.execSQL(CREATE_LINK_SET_TABLE);
 			db.execSQL(CREATE_LINK_WORD_TABLE);
 			db.execSQL(CREATE_LINK_WORD_SET_TABLE);
+			db.execSQL(CREATE_LINK_STATISTICS_TABLE);
+			
 		}
 
 		@Override
@@ -122,6 +129,7 @@ public class MemoirDAO{
 			db.execSQL("DROP TABLE IF EXISTS " + LINK_SET_TABLE);
 			db.execSQL("DROP TABLE IF EXISTS " + LINK_WORD_TABLE);
 			db.execSQL("DROP TABLE IF EXISTS " + LINK_WORD_SET_TABLE);
+			db.execSQL("DROP TABLE IF EXISTS " + LINK_STATISTICS_TABLE);
 			onCreate(db);
 			
 		}
@@ -324,6 +332,48 @@ public class MemoirDAO{
 			ourDatabase.execSQL("DELETE FROM " + LINK_SET_TABLE + " WHERE " + KEY_SET_ID + " = " + setIndex);
 			ourDatabase.execSQL("DELETE FROM " + LINK_WORD_SET_TABLE + " WHERE " + KEY_SET_ID + " = " + setIndex);
 			
+		}
+	
+		//Adds a record to Link Practice Statistics
+		public void insertIntoLinkPracticeStatistics(int accuracy, int wordAverage){
+
+			ourDatabase.execSQL("INSERT INTO " + LINK_STATISTICS_TABLE +
+							"(" + KEY_ACCURACY + ", " + KEY_WORD_AVERAGE + ") VALUES (" + accuracy + ", " + wordAverage + ");");
+		}
+		
+		//deletes the oldest record from Link Practice Statistics
+		public void deleteOldestStatisticRecord(){
+			
+			int oldestIndex;
+			
+			String[] column = {KEY_ID};
+			Cursor c = ourDatabase.query(LINK_STATISTICS_TABLE, column, null, null, null, null, null);
+			int iRow = c.getColumnIndex(KEY_ID);
+			c.moveToFirst();
+			oldestIndex = c.getInt(iRow);
+			ourDatabase.execSQL("DELETE FROM " + LINK_STATISTICS_TABLE + " WHERE " + KEY_ID + " = " + oldestIndex);
+		}
+		
+		//For fetching the list of statistics in Link Practice
+		public ArrayList<LinkPracticeStatistics> getLinkPracticeStatistics(){
+			ArrayList<LinkPracticeStatistics> statisticsList = new ArrayList<LinkPracticeStatistics>();
+			
+			String[] columns = new String[]{KEY_ACCURACY, KEY_WORD_AVERAGE};
+			Cursor c = ourDatabase.query(LINK_STATISTICS_TABLE, columns, null, null, null, null, null);
+			
+			int index = 0;
+			int iAccuracy = c.getColumnIndex(KEY_ACCURACY);
+			int iWordAverage = c.getColumnIndex(KEY_WORD_AVERAGE);
+				
+			for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+				for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+					statisticsList.add(new LinkPracticeStatistics());
+					statisticsList.get(index).setAccuracy(c.getInt(iAccuracy));
+					statisticsList.get(index).setWordAverage(c.getInt(iWordAverage));
+			        index++;
+			    }
+			}
+			return statisticsList;
 		}
 	
 }
