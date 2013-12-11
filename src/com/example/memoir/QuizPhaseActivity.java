@@ -1,7 +1,6 @@
 package com.example.memoir;
 
 import DAO.MemoirDAO;
-import DAO.StatisticsValues;
 import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
