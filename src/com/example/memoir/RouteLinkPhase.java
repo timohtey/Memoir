@@ -26,7 +26,7 @@ public class RouteLinkPhase extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.route_link_phase, menu);
+		//getMenuInflater().inflate(R.menu.route_link_phase, menu);
 		return true;
 	}
 
