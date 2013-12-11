@@ -13,7 +13,7 @@ public class GameModel implements Serializable{
 	public static final int WORD_DIFFICULTY_INCREMENT = 5;
 	public static final int TIME_DIFFICULTY_INCREMENT = 10000;
 	public static final int INITIAL_WORD_COUNT= 10;
-	public static final int INITIAL_TIME_LIMIT = 60000;
+	public static final int INITIAL_TIME_LIMIT = 180000;
 	
 	//Difficulty
 	//TODO: save level in db;
@@ -94,6 +94,11 @@ public class GameModel implements Serializable{
 		if(currentWordIndex>0){
 			currentWordIndex--;
 		}
+	}
+	
+	public void skipWord(){
+		tryCount++;
+		currentWordIndex++;
 	}
 
 	public boolean answerQuiz(String answer){

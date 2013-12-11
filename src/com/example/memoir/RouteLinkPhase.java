@@ -18,7 +18,7 @@ public class RouteLinkPhase extends Activity {
 	    actionBar.hide();
 		
 		
-		Button yourBtn = (Button) findViewById(R.id.rl_backBtn);
+		Button yourBtn = (Button) findViewById(R.id.ll_backBtn);
 		int btnSize=yourBtn.getLayoutParams().width;
 		yourBtn.setLayoutParams(new LayoutParams(btnSize, btnSize));
 	}

@@ -12,9 +12,9 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,14 +24,15 @@ public class LinkPhaseActivity extends Activity {
 	MediaPlayer buttonSound;
 	
 	GameModel gm;
-	TextView progressLabel;
-	TextView firstWordLabel;
-	TextView secondWordLabel;
-	TextView timeLabel;
-	Button nextWordLabel;
-	Button prevWordLabel;
-	ProgressBar progressBar;
-	ProgressBar timeBar;
+	TextView wordCountLbl;
+	TextView word1Lbl;
+	TextView word2Lbl;
+	TextView timerLbl;
+	TextView accuracyLbl;
+	Button nextBtn;
+	Button backBtn;
+	Button skipBtn;
+	ProgressBar timerBar;
 	CountDownTimer timer;
 	long timeRemaining=0;
 	long timeRemainingStatic=0;
@@ -40,7 +41,7 @@ public class LinkPhaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_link_phase);
+		setContentView(R.layout.activity_link_link_phase);
 				
 		buttonSound = MediaPlayer.create(LinkPhaseActivity.this, R.raw.button);
 		clockSound = MediaPlayer.create(LinkPhaseActivity.this, R.raw.clock);
@@ -50,6 +51,7 @@ public class LinkPhaseActivity extends Activity {
 		DAO.open();
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
+	    
 	    Bundle extras = getIntent().getExtras();
 	    if(extras != null){
 	    	ArrayList<String> arrayB = extras.getStringArrayList("customWords");
@@ -58,30 +60,40 @@ public class LinkPhaseActivity extends Activity {
 	    else gm = new GameModel(GameModel.FIXED_TIME_MODE, DAO);
 		
 		
-		progressLabel = (TextView)findViewById(R.id.progressRouteLbl2);
-		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel2);
-		secondWordLabel = (TextView)findViewById(R.id.secondWordField2);
-		timeLabel = (TextView)findViewById(R.id.timeRouteLabel2);
-		nextWordLabel = (Button)findViewById(R.id.nextRouteBtn);
-		prevWordLabel = (Button)findViewById(R.id.prevRouteBtn);
-		progressBar = (ProgressBar) findViewById(R.id.progressRouteBar2);
-		timeBar = (ProgressBar) findViewById(R.id.timeRouteBar2);
-
-		timeBar.setMax(gm.getTimeLimit());
-		prevWordLabel.setEnabled(false);
-		progressBar.setMax(gm.getWordCount());
+		wordCountLbl = (TextView)findViewById(R.id.ll_wordCntLbl);
+		accuracyLbl = (TextView)findViewById(R.id.ll_accuracyLbl);
+		skipBtn = (Button)findViewById(R.id.ll_skipBtn);
+		word1Lbl = (TextView)findViewById(R.id.ll_wordLbl1);
+		word2Lbl = (TextView)findViewById(R.id.ll_wordLbl2);
+		timerLbl = (TextView)findViewById(R.id.ll_timerLbl);
+		nextBtn = (Button)findViewById(R.id.ll_nextBtn);
+		backBtn = (Button)findViewById(R.id.ll_backBtn);
+		skipBtn = (Button)findViewById(R.id.ll_skipBtn);
+		timerBar = (ProgressBar) findViewById(R.id.ll_timerBar);
+		
+		
+		accuracyLbl.setVisibility(accuracyLbl.INVISIBLE);
+		accuracyLbl.setEnabled(false);
+		
+		skipBtn.setVisibility(skipBtn.INVISIBLE);
+		skipBtn.setEnabled(false);
+		
+		
+		
+		timerBar.setMax(gm.getTimeLimit());
+		backBtn.setEnabled(false);
 		updateLabels();
 		
 		timer = new CountDownTimer(gm.getTimeLimit(), 1000) {
 			int i = 60;
 		     public void onTick(long millisUntilFinished) {
-		    	 timeBar.setProgress(gm.getTimeLimit()-(int)millisUntilFinished);
+		    	 timerBar.setProgress(gm.getTimeLimit()-(int)millisUntilFinished);
 		    	 timeRemaining =  millisUntilFinished;
 		    	 i--;
 		    	 if(i<10){
-			    	 timeLabel.setText((millisUntilFinished/1000)/60 + ":0"+ i);
+			    	 timerLbl.setText((millisUntilFinished/1000)/60 + ":0"+ i);
 		    	 }
-		    	 else timeLabel.setText((millisUntilFinished/1000)/60 + ":"+ i);
+		    	 else timerLbl.setText((millisUntilFinished/1000)/60 + ":"+ i);
 		    	 if(i == 0){
 		    		 i = 60;
 		    	 }
@@ -101,19 +113,9 @@ public class LinkPhaseActivity extends Activity {
 		  
 		  DAO.close();
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.link_phase, menu);
-		return true;
-	}
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    
-		
-		
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) { //Back key pressed
 	       //Things to Do
 	    	Intent i = new Intent(LinkPhaseActivity.this, PauseScreen.class);
@@ -141,19 +143,19 @@ public class LinkPhaseActivity extends Activity {
 		if(requestCode ==0){
 			if(resultCode == RESULT_OK){
 				timeRemainingStatic = data.getLongExtra("timeRemaining", 300000);
-				timeBar.setMax((int)timeRemaining);
+				timerBar.setMax((int)timeRemaining);
 				Log.d("pauseTest","timeRemaining global: "+ timeRemaining);
 				timer = new CountDownTimer(timeRemainingStatic, 1000) {
 					int i = (int)((timeRemainingStatic/1000)%60);
 				     public void onTick(long millisUntilFinished) {
-				    	 timeBar.setProgress((int)(timeRemainingStatic-millisUntilFinished));
+				    	 timerBar.setProgress((int)(timeRemainingStatic-millisUntilFinished));
 				    	 Log.d("pauseTest","i: "+i+" progress:"+(timeRemainingStatic-millisUntilFinished) +"millis:"+millisUntilFinished);
 				    	 timeRemaining =  millisUntilFinished;
 				    	 i--;
 				    	 if(i<10){
-					    	 timeLabel.setText((millisUntilFinished/1000)/60 + ":0"+ i);
+					    	 timerLbl.setText((millisUntilFinished/1000)/60 + ":0"+ i);
 				    	 }
-				    	 else timeLabel.setText((millisUntilFinished/1000)/60 + ":"+ i);
+				    	 else timerLbl.setText((millisUntilFinished/1000)/60 + ":"+ i);
 				    	 if(i == 0){
 				    		 i = 60;
 				    		 Log.d("pauseTest","RESET seconds to 60");
@@ -169,7 +171,6 @@ public class LinkPhaseActivity extends Activity {
 				    	 startActivity(intent);
 				    	 timer.cancel();
 				    	 finish();
-				    	 
 				     }
 				  }.start();
 			}else if( resultCode == 2){
@@ -193,7 +194,7 @@ public class LinkPhaseActivity extends Activity {
 	
 	public void nextWord(View v){
 		
-		prevWordLabel.setEnabled(true);
+		backBtn.setEnabled(true);
 		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
 			Intent intent = new Intent(this,CountDown.class);
 			intent.putExtra("gameModel",gm);
@@ -202,7 +203,7 @@ public class LinkPhaseActivity extends Activity {
 			finish();
 		}else{
 			if(gm.getCurrentWordIndex()+3==gm.getWordCount()){
-				nextWordLabel.setText("Start Quiz!");
+				nextBtn.setText("Start Quiz!");
 			}
 			gm.nextWord();
 			buttonSound.start();
@@ -212,9 +213,9 @@ public class LinkPhaseActivity extends Activity {
 	
 	public void prevWord(View v){
 		if(gm.getCurrentWordIndex()==1)
-			prevWordLabel.setEnabled(false);
+			backBtn.setEnabled(false);
 		if(gm.getCurrentWordIndex()+2==gm.getWordCount()){
-			nextWordLabel.setText("Next Word");
+			nextBtn.setText("Next Word");
 		}
 		gm.prevWord();
 		buttonSound.start();
@@ -222,16 +223,12 @@ public class LinkPhaseActivity extends Activity {
 	}
 	
 	public void updateLabels(){
-		//Progress
-		
 		
 		int progress = gm.getCurrentWordIndex()+1;
-		progressBar.setProgress(progress);
-		progressLabel.setText(progress+"/"+gm.getWordCount());
+		wordCountLbl.setText(progress+"/"+gm.getWordCount());
 		
-		//Words
-		firstWordLabel.setText(gm.getWordOne());
-		secondWordLabel.setText(gm.getWordTwo());
+		word1Lbl.setText(gm.getWordOne());
+		word2Lbl.setText(gm.getWordTwo());
 	}
 
 	@Override

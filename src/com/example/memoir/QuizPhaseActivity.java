@@ -4,22 +4,18 @@ import DAO.MemoirDAO;
 import Model.GameModel;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Html;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,23 +27,25 @@ public class QuizPhaseActivity extends Activity {
 	
 	GameModel gm;
 	
-	TextView progressLabel;
-	TextView firstWordLabel;
-	TextView secondWordLabel;
-	TextView timeLabel;
+	TextView wordCountLbl;
+	TextView word1Lbl;
+	EditText word2ET;
+	TextView timerLbl;
 	TextView accuracyLbl;
-	Button nextWordLabel;
-	ProgressBar progressBar;
-	ProgressBar timeBar;
+	Button skipBtn;
+	ProgressBar timerBar;
+	LinearLayout wordDisplayLyt;
+	
 	CountDownTimer timer;
 	long timeRemaining=0;
 	long timeRemainingStatic=0;
+	
 	MemoirDAO DAO = new MemoirDAO(QuizPhaseActivity.this);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_quiz2_phase);
+		setContentView(R.layout.activity_link_quiz_phase);
         
 		ActionBar actionBar = getActionBar();
 	    actionBar.hide();
@@ -61,30 +59,30 @@ public class QuizPhaseActivity extends Activity {
         Intent i = getIntent();
         gm =  (GameModel)i.getSerializableExtra("gameModel");
         
-        timeLabel = (TextView)findViewById(R.id.timeRouteLabel2);
-		timeBar = (ProgressBar) findViewById(R.id.timeRouteBar2);
-		
-        progressLabel = (TextView)findViewById(R.id.progressLabel2);
-        progressBar = (ProgressBar) findViewById(R.id.progressRouteBar2);
-        accuracyLbl = (TextView)findViewById(R.id.accuracyLbl2);
         
-		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel2);
-		secondWordLabel = (EditText)findViewById(R.id.secondWordField2);
+        
+        wordCountLbl = (TextView)findViewById(R.id.lq_wordCntLbl);
+		accuracyLbl = (TextView)findViewById(R.id.lq_accuracyLbl);
+		skipBtn = (Button)findViewById(R.id.lq_skipBtn);
+		word1Lbl = (TextView)findViewById(R.id.lq_wordLbl1);
+		word2ET = (EditText)findViewById(R.id.lq_word2ET);
+		timerLbl = (TextView)findViewById(R.id.lq_timerLbl);
+		skipBtn = (Button)findViewById(R.id.lq_skipBtn);
+		timerBar = (ProgressBar) findViewById(R.id.lq_timerBar);
 		
-		timeBar.setMax(gm.getTimeLimit());
-		progressBar.setMax(gm.getWordCount());
+		timerBar.setMax(gm.getTimeLimit());
         gm.startQuizPhase();
         
         timer = new CountDownTimer(gm.getTimeLimit(), 1000) {
 			int i = 60;
 		     public void onTick(long millisUntilFinished) {
-		    	 timeBar.setProgress(gm.getTimeLimit()-(int)millisUntilFinished);
+		    	 timerBar.setProgress(gm.getTimeLimit()-(int)millisUntilFinished);
 		    	 timeRemaining =  millisUntilFinished;
 		    	 i--;
 		    	 if(i<10){
-			    	 timeLabel.setText((millisUntilFinished/1000)/60 + ":0"+ i);
+			    	 timerLbl.setText((millisUntilFinished/1000)/60 + ":0"+ i);
 		    	 }
-		    	 else timeLabel.setText((millisUntilFinished/1000)/60 + ":"+ i);
+		    	 else timerLbl.setText((millisUntilFinished/1000)/60 + ":"+ i);
 		    	 if(i == 0){
 		    		 i = 60;
 		    	 }
@@ -102,17 +100,17 @@ public class QuizPhaseActivity extends Activity {
 		  }.start();
 		  
 		  //OVERRIDE KEYBOARD DONE
-		  secondWordLabel.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+		  word2ET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 		        @Override
 		        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 		            if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-		            	String answer = secondWordLabel.getText().toString();
+		            	String answer = word2ET.getText().toString();
 		        		if(gm.answerQuiz(answer)){
 		        			
 		        			correctSound.start();
 		        			updateLabels();
-		        			secondWordLabel.setText("");
+		        			word2ET.setText("");
 		        	        if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
 
 		        	        	Intent intent = new Intent(QuizPhaseActivity.this, ResultScreen.class);
@@ -187,19 +185,19 @@ public class QuizPhaseActivity extends Activity {
 		if(requestCode ==0){
 			if(resultCode == RESULT_OK){
 				timeRemainingStatic = data.getLongExtra("timeRemaining", 300000);
-				timeBar.setMax((int)timeRemaining);
+				timerBar.setMax((int)timeRemaining);
 				Log.d("pauseTest","timeRemaining global: "+ timeRemaining);
 				timer = new CountDownTimer(timeRemainingStatic, 1000) {
 					int i = (int)((timeRemainingStatic/1000)%60);
 				     public void onTick(long millisUntilFinished) {
-				    	 timeBar.setProgress((int)(timeRemainingStatic-millisUntilFinished));
+				    	 timerBar.setProgress((int)(timeRemainingStatic-millisUntilFinished));
 				    	 Log.d("pauseTest","i: "+i+" progress:"+(timeRemainingStatic-millisUntilFinished) +"millis:"+millisUntilFinished);
 				    	 timeRemaining =  millisUntilFinished;
 				    	 i--;
 				    	 if(i<10){
-					    	 timeLabel.setText((millisUntilFinished/1000)/60 + ":0"+ i);
+					    	 timerLbl.setText((millisUntilFinished/1000)/60 + ":0"+ i);
 				    	 }
-				    	 else timeLabel.setText((millisUntilFinished/1000)/60 + ":"+ i);
+				    	 else timerLbl.setText((millisUntilFinished/1000)/60 + ":"+ i);
 				    	 if(i == 0){
 				    		 i = 60;
 				    		 Log.d("pauseTest","RESET seconds to 60");
@@ -226,6 +224,28 @@ public class QuizPhaseActivity extends Activity {
 			}
 		}
 	}
+	public void skipWord(View view){
+		gm.skipWord();
+		updateLabels();
+		word2ET.setText("");
+		wrongSound.start();
+		if(gm.getCurrentWordIndex()==gm.getWordCount()-1){
+
+        	Intent intent = new Intent(QuizPhaseActivity.this, ResultScreen.class);
+		    	 gm.endQuizPhase(true,timeRemaining);
+		    	 /*
+		    	 {	//RECORD GAME
+		    		 int id = DAO.getLastStatisticIndex()+1;
+		    		 StatisticsValues result = new StatisticsValues(id,"link",gm.computeAccuracy(),gm.computeWordPerMin(),gm.getLinkLevel());;
+		    		 DAO.updateStatistics(result);
+		    	 }*/
+		    	 intent.putExtra("gameModel",gm);
+		    	 startActivity(intent);
+		    	 timer.cancel();
+		    	 finish();
+        	//TODO: goto result screen
+        }
+	}
 	
 	@Override
 	protected void onResume() {
@@ -238,9 +258,8 @@ public class QuizPhaseActivity extends Activity {
 		int progress = gm.getCurrentWordIndex()+1;
 		
 		accuracyLbl.setText(Integer.toString(gm.computeAccuracy()).concat("% Accuracy") );
-		progressBar.setProgress(progress);
-		progressLabel.setText(progress+"/"+gm.getWordCount() + " words");
-		firstWordLabel.setText(gm.getWordOne());
+		wordCountLbl.setText(progress+"/"+gm.getWordCount() + " words");
+		word1Lbl.setText(gm.getWordOne());
 		
 	}
 
