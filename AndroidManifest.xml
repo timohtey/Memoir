@@ -46,6 +46,8 @@
         <activity android:name="ResultScreen"></activity>
         <activity android:name="RouteMain"></activity>
         <activity android:name="AddRouteScreen"></activity>
+        <activity android:name="ViewWords"></activity>
+        <activity android:name="RouteStart"></activity>
         
     </application>
 

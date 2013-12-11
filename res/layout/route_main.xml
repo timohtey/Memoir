@@ -7,10 +7,24 @@
 
     <ListView
         android:id="@+id/routeListView"
-        android:background="#ffff"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="485dp"
+        android:background="#ffff" >
 
     </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/practiceRouteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:text="PRACTICE"
+            android:textSize="30sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

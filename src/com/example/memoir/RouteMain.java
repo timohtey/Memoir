@@ -14,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -31,6 +33,7 @@ public class RouteMain extends Activity{
 	private View prevView = null;
 	private MenuItem imageButton;
 	private MenuItem deleteButton;
+	private Button practiceBtn;
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.route_main);
@@ -38,7 +41,7 @@ public class RouteMain extends Activity{
         ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#1abc9c")));
         routeListView = (ListView) findViewById(R.id.routeListView);
-        
+        practiceBtn = (Button) findViewById(R.id.practiceRouteBtn);
         Bundle extras = getIntent().getExtras();
         if(extras == null){
 	        routes.add(new Route());
@@ -66,6 +69,17 @@ public class RouteMain extends Activity{
         }
         
         updateData();
+        
+        practiceBtn.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(RouteMain.this, RouteStart.class);
+				intent.putExtra("routes", routes);
+				startActivity(intent);
+			}
+        	
+        });
 	}
 	
 	private void setPrevView(View view){

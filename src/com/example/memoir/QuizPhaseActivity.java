@@ -61,11 +61,11 @@ public class QuizPhaseActivity extends Activity {
         Intent i = getIntent();
         gm =  (GameModel)i.getSerializableExtra("gameModel");
         
-        timeLabel = (TextView)findViewById(R.id.timeLabel2);
-		timeBar = (ProgressBar) findViewById(R.id.timeBar2);
+        timeLabel = (TextView)findViewById(R.id.timeRouteLabel2);
+		timeBar = (ProgressBar) findViewById(R.id.timeRouteBar2);
 		
         progressLabel = (TextView)findViewById(R.id.progressLabel2);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        progressBar = (ProgressBar) findViewById(R.id.progressRouteBar2);
         accuracyLbl = (TextView)findViewById(R.id.accuracyLbl2);
         
 		firstWordLabel = (TextView)findViewById(R.id.firstWordLabel2);

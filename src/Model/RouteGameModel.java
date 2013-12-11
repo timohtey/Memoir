@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import DAO.MemoirDAO;
 
-public class GameModel implements Serializable{
+public class RouteGameModel implements Serializable{
 	
 	//CONSTANTS
 	public static final int FIXED_TIME_MODE = 0;
@@ -17,7 +17,7 @@ public class GameModel implements Serializable{
 	
 	//Difficulty
 	//TODO: save level in db;
-	public static int linkLevel = 1;
+	public static int routeLevel = 1;
 	
 	private ArrayList<String> wordList = new ArrayList<String>();
 	private int mode = FIXED_TIME_MODE;
@@ -32,7 +32,7 @@ public class GameModel implements Serializable{
 	private boolean isGameRecorded = false;
 	//declare time finished;
 	
-	public GameModel(int mode, MemoirDAO dao){
+	public RouteGameModel(int mode, MemoirDAO dao){
 		this.mode = mode;
 		setDifficulty(mode);
 		
@@ -42,7 +42,7 @@ public class GameModel implements Serializable{
 		System.out.println("test");
 	}
 	
-	public GameModel(int mode, ArrayList<String> array){
+	public RouteGameModel(int mode, ArrayList<String> array){
 		this.mode = mode;
 		setDifficulty(mode);
 		
@@ -56,10 +56,10 @@ public class GameModel implements Serializable{
 		switch(mode){
 		case FIXED_TIME_MODE : 
 			timeLimit = INITIAL_TIME_LIMIT; 
-			wordCount = INITIAL_WORD_COUNT + ((linkLevel-1) * WORD_DIFFICULTY_INCREMENT);
+			wordCount = INITIAL_WORD_COUNT + ((routeLevel-1) * WORD_DIFFICULTY_INCREMENT);
 			break;
 		case FIXED_WORDCOUNT_MODE :
-			timeLimit = INITIAL_TIME_LIMIT - ((linkLevel-1) * TIME_DIFFICULTY_INCREMENT);
+			timeLimit = INITIAL_TIME_LIMIT - ((routeLevel-1) * TIME_DIFFICULTY_INCREMENT);
 			wordCount = INITIAL_WORD_COUNT;
 			break;
 		}
@@ -124,8 +124,8 @@ public class GameModel implements Serializable{
 		return Math.round(correctCount/((float)(timeFinished/1000)/60));
 	}
 	
-	public int getLinkLevel(){
-		return linkLevel;
+	public int getRouteLevel(){
+		return routeLevel;
 	}
 
 	public void startQuizPhase(){
@@ -143,18 +143,18 @@ public class GameModel implements Serializable{
 		this.timeFinished = timeFinished;
 		tryCount += remainingWords;
 		if(isFinished){
-			linkLevel++;
+			routeLevel++;
 			if(computeAccuracy()==1.0){
-				linkLevel++;
+				routeLevel++;
 			}
-		}else if(remainingWords/getWordCount()>= .75 && linkLevel>=4){
-			linkLevel-=3;
+		}else if(remainingWords/getWordCount()>= .75 && routeLevel>=4){
+			routeLevel-=3;
 			
-		}else if(remainingWords/getWordCount()>= .5&& linkLevel>=3){
-			linkLevel-=2;
+		}else if(remainingWords/getWordCount()>= .5&& routeLevel>=3){
+			routeLevel-=2;
 			
-		}else if(remainingWords/getWordCount()>= .25&& linkLevel>=2){
-			linkLevel-=1;
+		}else if(remainingWords/getWordCount()>= .25&& routeLevel>=2){
+			routeLevel-=1;
 			
 		}
 	}

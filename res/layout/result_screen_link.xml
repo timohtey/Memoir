@@ -86,6 +86,17 @@
         android:textSize="30sp" />
 
     <Button
+        android:id="@+id/viewWordsBtn"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/container_dropshadow"
+        android:text="View Words"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+
+    <Button
         android:id="@+id/exitToMainMenu"
         android:layout_width="170dp"
         android:layout_height="60dp"

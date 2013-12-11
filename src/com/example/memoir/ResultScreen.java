@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class ResultScreen extends Activity {
 	Button playAgain;
 	Button exitToMainMenu;
+	Button viewWords;
 	TextView accuracy;
 	TextView wordsPM;
 	TextView goodJob;
@@ -32,6 +33,7 @@ public class ResultScreen extends Activity {
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Canter/Canter Bold.otf");
         
         playAgain = (Button) findViewById(R.id.playAgain);
+        viewWords = (Button) findViewById(R.id.viewWordsBtn);
         exitToMainMenu = (Button) findViewById(R.id.exitToMainMenu);
         accuracy = (TextView)findViewById(R.id.accuracyTxt);
         wordsPM  = (TextView)findViewById(R.id.wordsGuessedpm);
@@ -41,6 +43,16 @@ public class ResultScreen extends Activity {
         float wordsGuessed = gm.computeWordPerMin();
         accuracy.setText(""+accuracyComputed +"%");
         wordsPM.setText(""+wordsGuessed);
+        
+        viewWords.setOnClickListener(new OnClickListener(){    
+            @Override
+			public void onClick(View v) {
+            	Intent i = new Intent(ResultScreen.this, ViewWords.class);
+            	i.putExtra("words", gm);
+            	startActivity(i);
+            	finish();
+            }
+        });
         
         playAgain.setOnClickListener(new OnClickListener(){    
             @Override
