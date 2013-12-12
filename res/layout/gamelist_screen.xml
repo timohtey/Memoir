@@ -49,6 +49,25 @@
         android:scaleType="centerInside"
         android:src="@drawable/begin_linking" />
 
+    <ImageView
+        android:id="@+id/images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/customGameButton"
+        android:layout_below="@+id/goBtn"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/second_game" />
+
+    <ImageButton
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/images"
+        android:layout_marginBottom="44dp"
+        android:layout_toRightOf="@+id/tutorialButton"
+        android:background="@null"
+        android:src="@drawable/start" />
+
     <ImageButton
         android:id="@+id/tutorialButton2"
         android:layout_width="wrap_content"
@@ -58,23 +77,5 @@
         android:layout_marginBottom="14dp"
         android:background="@null"
         android:src="@drawable/tutorial_button" />
-
-    <ImageButton
-        android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tutorialButton2"
-        android:layout_toRightOf="@+id/tutorialButton2"
-        android:background="@null"
-        android:src="@drawable/start" />
-
-    <ImageView
-        android:id="@+id/images"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/customGameButton"
-        android:layout_below="@+id/goBtn"
-        android:layout_marginTop="11dp"
-        android:src="@drawable/second_game" />
 
 </RelativeLayout>

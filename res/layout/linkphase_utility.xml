@@ -10,19 +10,6 @@
         android:layout_height="wrap_content"
         android:background="#1abc9c"
         android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/memoirTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginTop="10sp"
-            android:text="Enter custom words:"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#ffff"
-            android:textColorHint="#ffff"
-            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -33,12 +20,39 @@
         android:orientation="vertical" >
 
         <EditText
+            android:id="@+id/titleCustomLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_weight="0.04"
+            android:ems="10"
+            android:hint="Title"
+            android:textColor="#ffff"
+            android:textColorHint="#ffff"
+            android:textColorLink="#ffff"
+            android:textSize="25sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/descCustomLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_weight="0.04"
+            android:ems="10"
+            android:hint="Description"
+            android:textColor="#ffff"
+            android:textColorHint="#ffff"
+            android:textSize="25sp" />
+
+        <EditText
             android:id="@+id/customWordsTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170sp"
+            android:layout_marginTop="10sp"
             android:layout_weight="0.04"
-            android:background="@drawable/woodpine"
             android:ems="10"
             android:hint="seperate words with a &apos;,&apos;"
             android:singleLine="true"
@@ -48,13 +62,12 @@
 
     </LinearLayout>
 
-    <ImageView
+    <Button
         android:id="@+id/goBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:background="@null"
-        android:clickable="true"
-        android:src="@drawable/go_button" />
+        android:text="Add Set"
+        android:textColor="#ffff"
+        android:textSize="40sp" />
 
 </LinearLayout>

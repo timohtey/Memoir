@@ -2,85 +2,93 @@ package com.example.memoir;
 
 import java.util.ArrayList;
 
+import DAO.LinkCustomSet;
+import DAO.MemoirDAO;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class LinkPhaseUtility extends Activity {
 	EditText customWordsTxt;
-	ImageView imgBtn;
+	EditText titleCustom;
+	EditText descCustom;
+	Button imgBtn;
+	private int EDIT_MODE = 1;
+	private int ADD_MODE = 2;
+	private int mode = 0;
+	int position = 0;
+	//MemoirDAO dao = new MemoirDAO(this);
+	ArrayList<LinkCustomSet> linkCustom = new ArrayList<LinkCustomSet>();
+	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.linkphase_utility);
         
         ActionBar actionBar = getActionBar();
 	    actionBar.hide();
-	    ArrayList<String> customWords;
-	    Bundle extras = getIntent().getExtras();
-	    //final Intent myIntent = new Intent(LinkPhaseUtility.this, LinkPhaseUtility_Start.class);
-	    final Intent myIntent = new Intent(LinkPhaseUtility.this, LinkPhaseActivity.class);
-	    customWordsTxt = (EditText) findViewById(R.id.customWordsTxt);
 	    
-	    if(extras != null){
-	    	customWords = extras.getStringArrayList("customWords");
-	    	String txt = "";
-	    	for(int i = 0; i < customWords.size();i++){
-	 	    	txt+=customWords.get(i);
-	 	    	if(i!=customWords.size()-1){
-	 	    		txt+=", ";
-	 	    	}
-	 	    }
-	    	
-	    	customWordsTxt.setText(txt);
-	    	myIntent.putExtra("edited", "true");
+	    Intent i = getIntent();
+
+		   // dao.open();
+		    //linkCustom = dao.getLinkCustomDisplay();
+		    customWordsTxt = (EditText) findViewById(R.id.customWordsTxt);
+		    titleCustom= (EditText) findViewById(R.id.titleCustomLink);
+			descCustom= (EditText) findViewById(R.id.descCustomLink);
+		    imgBtn = (Button) findViewById(R.id.goBtn);
+		    
+	    if(i.getExtras().containsKey("position")){
+	    	position = i.getExtras().getInt("position", 0);
+	    	linkCustom = (ArrayList<LinkCustomSet>) i.getSerializableExtra("custom");
+	    	mode = EDIT_MODE;
+	    	imgBtn.setText("Save Set");
+	    } else {
+	    	linkCustom = (ArrayList<LinkCustomSet>) i.getSerializableExtra("custom");
+	    	mode = ADD_MODE;
+	    	imgBtn.setText("Add Set");
+	    }
+	    
+	    
+	    if(mode == EDIT_MODE){
+	    	//add word set
+	    	titleCustom.setText(linkCustom.get(position).getSetName());
+	    	descCustom.setText(linkCustom.get(position).getDescription());
+	    	customWordsTxt.setText(linkCustom.get(position).getWords());
 	    }
 	   
-	    imgBtn = (ImageView)findViewById(R.id.goBtn);
 	    
 	    imgBtn.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
-				
-                ArrayList<String> customWordsArray = new ArrayList<String>();
-            	StringBuilder temp = new StringBuilder(customWordsTxt.getText().toString());
-            	String customWords = "";    
-            	for(int i = 0; i < temp.length(); i++){
-            		if(temp.charAt(i) == ' ' || temp.charAt(i) == ','){
-            			if(customWords.equals("") == false){
-	            		  customWordsArray.add(customWords);
-            			}
-            			customWords = "";
-            		}else {
-            			customWords += temp.charAt(i);
-            		}
-   				}
-            	customWordsArray.add(customWords);
-
-               // myIntent.putExtra("customWords", customWordsTxt.getText().toString());
-                myIntent.putExtra("customWords", customWordsArray);
+            	
+        	    Intent myIntent = new Intent(LinkPhaseUtility.this, LinkPhaseUtility_Start.class);
+            	
+            	if(mode == ADD_MODE){
+            		linkCustom.add(new LinkCustomSet());
+            		linkCustom.get(linkCustom.size()-1).setSetName(titleCustom.getText().toString());
+            		linkCustom.get(linkCustom.size()-1).setDescription(descCustom.getText().toString());
+            		linkCustom.get(linkCustom.size()-1).setWords(customWordsTxt.getText().toString());
+            		//dao.insertWordList(titleCustom.getText().toString(), descCustom.getText().toString(), customWordsArray);
+            	}else {
+            		linkCustom.get(position).setSetName(titleCustom.getText().toString());
+            		linkCustom.get(position).setDescription(descCustom.getText().toString());
+            		linkCustom.get(position).setWords(customWordsTxt.getText().toString());
+            		//dao.updateLinkCustom(titleCustom.getText().toString(), 0, 0);
+            	}
+            	//dao.close();
+            	myIntent.putExtra("custom", linkCustom);
                 startActivity(myIntent);				
 			}
 	    	
 	    });
 	    
      }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 }

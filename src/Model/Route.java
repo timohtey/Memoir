@@ -6,35 +6,32 @@ import java.util.ArrayList;
 import android.R;
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.widget.ImageView;
 
 public class Route extends Activity implements Serializable{
-	private ArrayList<ImageView> routeImages;
 	private String routeDescription;
 	private String routeTitle;
 	private String routeMastery;
 	private String lastPlayed;
 	private String landmarksNmbr;
+	private ArrayList<Uri> routeImages = new ArrayList<Uri>();
 	
 	public Route(){
 		//Gets in the DAO
-		routeImages = new ArrayList<ImageView>();
 		routeDescription = "";
 		routeTitle = "";
 		routeMastery = "";
 		
 	}
 	
-	public ArrayList<ImageView> getRouteImages() {
+	public ArrayList<Uri> getRouteImages() {
 		return routeImages;
 	}
 	
-	public void setRouteImages(/*ArrayList<String> uri*/) {
-		for(int i = 0; i< 5/*uri.size()*/; i++){
-			routeImages.add(new ImageView(this));
-			routeImages.get(i).setImageResource(R.drawable.bottom_bar);
-			//routeImages.get(i).setImageBitmap(bitmap.createScaledBitmap(bitmap,50,50,false));
-		}
+	public void setRouteImages(Uri uri) {
+		routeImages.add(uri);
 	}
 	public String getRouteDescription() {
 		return routeDescription;

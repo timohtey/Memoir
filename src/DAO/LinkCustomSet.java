@@ -1,11 +1,22 @@
 package DAO;
 
-public class LinkCustomSet {
+import java.io.Serializable;
+
+public class LinkCustomSet implements Serializable{
 
 	String setName;
 	String description;
 	int accuracy;
 	int wordAverage;
+	String words;
+	
+	public String getWords(){
+		return words;
+	}
+	
+	public void setWords(String words){
+		this.words = words;
+	}
 	
 	public String getSetName() {
 		return setName;

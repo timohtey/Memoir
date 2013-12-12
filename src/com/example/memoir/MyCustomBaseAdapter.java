@@ -1,9 +1,13 @@
 package com.example.memoir;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Model.Route;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +20,11 @@ public class MyCustomBaseAdapter extends BaseAdapter {
 	 private ArrayList<Route> routeArrayList = new ArrayList<Route>();
 	 
 	 private LayoutInflater mInflater;
+	 private Context context;
 	
 	 public MyCustomBaseAdapter(Context context, ArrayList<Route> route) {
 		  this.routeArrayList = route;
+		  this.context = context;
 		  mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	 }
 	
@@ -55,8 +61,19 @@ public class MyCustomBaseAdapter extends BaseAdapter {
 		  }
 		  holder.txtTitle.setText(routeArrayList.get(position).getRouteTitle());
 		  holder.txtDesc.setText(routeArrayList.get(position).getRouteDescription());
-		  
-		  holder.imgRoute.setImageResource(R.drawable.chainlink_icon);
+		  Bitmap bitmap = null;
+		  if(routeArrayList.get(position).getRouteImages().size() != 0){
+			  try {
+				bitmap = MediaStore.Images.Media.getBitmap(this.context.getContentResolver(), routeArrayList.get(position).getRouteImages().get(0));
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			  	holder.imgRoute.setImageBitmap(bitmap.createScaledBitmap(bitmap,50,50,false));
+		  }
 		  
 		  return convertView;
 	 }

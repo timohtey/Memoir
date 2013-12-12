@@ -38,6 +38,7 @@ public class AddRouteScreen extends Activity {
     Button saveRoute;
     String mode = "";
     int position;
+    Uri uri;
     ArrayList<ImageView> addImageView = new ArrayList<ImageView>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,10 +102,10 @@ public class AddRouteScreen extends Activity {
     	addImageView.add(new ImageView(this));
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                selectedImagePath = getPath(selectedImageUri);
+                this.uri = data.getData();
+                selectedImagePath = getPath(this.uri);
                 try {
-					bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+					bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), this.uri);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -126,13 +127,16 @@ public class AddRouteScreen extends Activity {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						addLandmarkBtn.setText("Edit Image: "+selectedImagePath);
+						routes.get(position).setRouteImages(getUri());
 					}
                 	
                 });
             }
         }
     }
-    
+    private Uri getUri(){
+    	return this.uri;
+    }
     private int getLast() {
     	return addImageView.size()-1;
     }
